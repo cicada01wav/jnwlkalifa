@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JNWLKALIFA</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        /* =====================================================
+           INTRO
+        ===================================================== */
+
+        .intro-screen {
+            position: fixed;
+            inset: 0;
+
+            width: 100%;
+            height: 100vh;
+
+            background: #000;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 1000;
+
+            animation: introFade 1.5s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .intro-logo {
+            width: 500px;
+            max-width: 75vw;
+
+            opacity: 0;
+
+            animation:
+                introLogoAppear
+                0.9s
+                ease
+                forwards;
+        }
+
+        @keyframes introLogoAppear {
+
+            0% {
+                opacity: 0;
+                transform: scale(0.90);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+        @keyframes introFade {
+
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+        }
+
+
+        /* =====================================================
+           NOM
+        ===================================================== */
+
+        .site-name {
+
+            position: fixed;
+
+            top: 15px;
+            left: 15px;
+
+            font-size: 12px;
+
+            color: #fff;
+
+            z-index: 100;
+        }
+
+
+        /* =====================================================
+           LOGO PRINCIPAL
+        ===================================================== */
+
+        .logo-container {
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            opacity: 0;
+
+            animation:
+                mainContentAppear
+                1.5s
+                ease
+                forwards;
+
+            animation-delay: 1.2s;
+        }
+
+        @keyframes mainContentAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .logo {
+
+            width: 400px;
+            max-width: 80vw;
+
+            height: auto;
+
+            display: block;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           EMAIL
+        ===================================================== */
+
+        .email {
+
+            display: block;
+
+            margin-top: 22px;
+
+            font-size: 18px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+        .email:hover {
+            opacity: 0.55;
+        }
+
+
+        /* =====================================================
+           TITRES DE SECTIONS
+        ===================================================== */
+
+        .section-title {
+
+            font-size: 12px;
+
+            font-weight: normal;
+
+            color: #fff;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           CLIP YOUTUBE
+        ===================================================== */
+
+        .clips-section {
+
+            width: 100%;
+
+            padding:
+                60px
+                15px
+                100px;
+
+            position: relative;
+
+            opacity: 0;
+
+            transform: translateY(45px);
+
+            filter: blur(8px);
+
+            animation:
+                clipsAppear
+                1.8s
+                cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
+
+            animation-delay: 1.65s;
+        }
+
+        @keyframes clipsAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateY(45px);
+                filter: blur(8px);
+            }
+
+            60% {
+                opacity: 0.7;
+                filter: blur(2px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+
+        }
+
+
+        /* =====================================================
+           CONTENEUR HORIZONTAL
+        ===================================================== */
+
+        .horizontal-wrapper {
+
+            position: relative;
+
+            width: 100%;
+        }
+
+        .horizontal-container {
+
+            width: 100%;
+
+            display: flex;
+
+            gap: 15px;
+
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            scroll-behavior: smooth;
+
+            padding-bottom: 10px;
+
+            scrollbar-width: none;
+        }
+
+        .horizontal-container::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        /* =====================================================
+           VIDEOS
+        ===================================================== */
+
+        .clip {
+
+            flex:
+                0 0 60vw;
+
+            max-width: 900px;
+
+            aspect-ratio: 16 / 9;
+
+            background: #111;
+
+            opacity: 0;
+
+            transform: translateX(25px);
+
+            animation:
+                clipAppear
+                1.3s
+                cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
+        }
+
+        .clip:nth-child(1) {
+            animation-delay: 1.9s;
+        }
+
+        .clip:nth-child(2) {
+            animation-delay: 2.0s;
+        }
+
+        .clip:nth-child(3) {
+            animation-delay: 2.1s;
+        }
+
+        .clip:nth-child(4) {
+            animation-delay: 2.2s;
+        }
+
+        .clip:nth-child(5) {
+            animation-delay: 2.3s;
+        }
+
+        .clip:nth-child(6) {
+            animation-delay: 2.4s;
+        }
+
+        .clip:nth-child(7) {
+            animation-delay: 2.5s;
+        }
+
+        .clip:nth-child(8) {
+            animation-delay: 2.6s;
+        }
+
+        @keyframes clipAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateX(25px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+
+        .clip iframe {
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            border: none;
+        }
+
+
+        /* =====================================================
+           FLECHES
+        ===================================================== */
+
+        .scroll-button {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 45px;
+            height: 45px;
+
+            border: none;
+
+            background:
+                rgba(0, 0, 0, 0.75);
+
+            color: #fff;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            transition:
+                opacity 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .scroll-button:hover {
+
+            opacity: 0.6;
+
+            background:
+                rgba(0, 0, 0, 0.95);
+        }
+
+        .scroll-left {
+            left: 10px;
+        }
+
+        .scroll-right {
+            right: 10px;
+        }
+
+
+        /* =====================================================
+           CRÉDITS
+        ===================================================== */
+
+        .credits-section {
+
+            width: 100%;
+
+            padding:
+                80px
+                15px
+                120px;
+
+            position: relative;
+
+            opacity: 0;
+
+            transform: translateY(50px);
+
+            filter: blur(8px);
+
+            animation:
+                creditsAppear
+                1.8s
+                cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
+
+            animation-delay: 2.7s;
+        }
+
+        @keyframes creditsAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+                filter: blur(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+
+        }
+
+
+        /* =====================================================
+           CARTE MUSO
+        ===================================================== */
+
+        .credit-card {
+
+            flex:
+                0 0 420px;
+
+            height: 300px;
+
+            background: #111;
+
+            position: relative;
+
+            overflow: hidden;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            transition:
+                background 0.4s ease;
+        }
+
+        .credit-card:hover {
+            background: #181818;
+        }
+
+        .credit-name {
+
+            font-size: 22px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 15px;
+        }
+
+        .credit-description {
+
+            font-size: 12px;
+
+            opacity: 0.6;
+
+            text-align: center;
+
+            max-width: 280px;
+
+            line-height: 1.5;
+        }
+
+        .credit-arrow {
+
+            position: absolute;
+
+            bottom: 20px;
+            right: 20px;
+
+            font-size: 18px;
+
+            opacity: 0.5;
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .credit-card:hover .credit-arrow {
+
+            opacity: 1;
+
+            transform: translateX(5px);
+        }
+
+
+        /* =====================================================
+           SPOTIFY
+        ===================================================== */
+
+        .spotify-card {
+
+            flex:
+                0 0 420px;
+
+            height: 300px;
+
+            background: #000;
+
+            overflow: hidden;
+        }
+
+        .spotify-card iframe {
+
+            width: 100%;
+            height: 100%;
+
+            border: none;
+        }
+
+
+        /* =====================================================
+           SOUNDCLOUD
+        ===================================================== */
+
+        .soundcloud-card {
+
+            flex:
+                0 0 420px;
+
+            height: 300px;
+
+            background: #000;
+
+            overflow: hidden;
+        }
+
+        .soundcloud-card iframe {
+
+            width: 100%;
+            height: 100%;
+
+            border: none;
+        }
+
+
+        /* =====================================================
+           INSTAGRAM MAPLUSTP
+        ===================================================== */
+
+        .instagram-container {
+
+            width: 100%;
+
+            padding:
+                100px
+                20px
+                50px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            opacity: 0;
+
+            transform: translateY(45px);
+
+            filter: blur(8px);
+
+            animation:
+                instagramAppear
+                1.8s
+                cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
+
+            animation-delay: 3.6s;
+        }
+
+        @keyframes instagramAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateY(45px);
+                filter: blur(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+
+        }
+
+        .instagram-link {
+
+            display: inline-block;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 42px;
+
+            letter-spacing: -1px;
+
+            transition:
+                opacity 0.4s ease,
+                transform 0.4s ease;
+        }
+
+        .instagram-link:hover {
+
+            opacity: 0.65;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =====================================================
+           UNTITLED
+        ===================================================== */
+
+        .untitled-container {
+
+            width: 100%;
+
+            padding:
+                20px
+                20px
+                55px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 70px;
+
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            filter: blur(8px);
+
+            animation:
+                untitledAppear
+                1.6s
+                cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
+
+            animation-delay: 3.9s;
+        }
+
+        @keyframes untitledAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateY(35px);
+                filter: blur(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+
+        }
+
+        .untitled-link {
+
+            position: relative;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            transition:
+                opacity 0.4s ease,
+                transform 0.4s ease;
+        }
+
+        .untitled-link:hover {
+
+            opacity: 0.6;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           COURT METRAGES
+        ===================================================== */
+
+        .short-films-container {
+
+            width: 100%;
+
+            padding:
+                25px
+                20px
+                90px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            filter: blur(8px);
+
+            animation:
+                shortFilmsAppear
+                1.6s
+                cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
+
+            animation-delay: 4.1s;
+        }
+
+        @keyframes shortFilmsAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateY(35px);
+                filter: blur(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+
+        }
+
+        .short-films-link {
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            transition:
+                opacity 0.4s ease,
+                transform 0.4s ease;
+        }
+
+        .short-films-link:hover {
+
+            opacity: 0.6;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           QUALIA
+        ===================================================== */
+
+        .qualia-section {
+
+            width: 100%;
+
+            padding:
+                50px
+                20px
+                160px;
+
+            opacity: 0;
+
+            transform: translateY(50px);
+
+            filter: blur(8px);
+
+            animation:
+                qualiaAppear
+                1.8s
+                cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
+
+            animation-delay: 4.4s;
+        }
+
+        @keyframes qualiaAppear {
+
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+                filter: blur(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+
+        }
+
+        .qualia-title {
+
+            font-size: 12px;
+
+            margin-bottom: 30px;
+        }
+
+        .qualia-grid {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           QUALIA INSTAGRAM
+        ===================================================== */
+
+        .qualia-box {
+
+            width: 100%;
+
+            height: 500px;
+
+            background: #080808;
+
+            border:
+                1px solid #151515;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .qualia-instagram {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            transition:
+                background 0.4s ease;
+        }
+
+        .qualia-instagram:hover {
+
+            background: #111;
+        }
+
+        .qualia-instagram-title {
+
+            font-size: 32px;
+
+            margin-bottom: 15px;
+        }
+
+        .qualia-instagram-name {
+
+            font-size: 15px;
+
+            opacity: 0.55;
+        }
+
+        .qualia-instagram-arrow {
+
+            margin-top: 35px;
+
+            font-size: 20px;
+
+            opacity: 0.5;
+        }
+
+
+        /* =====================================================
+           QUALIA YOUTUBE
+        ===================================================== */
+
+        .qualia-youtube {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            transition:
+                background 0.4s ease;
+        }
+
+        .qualia-youtube:hover {
+
+            background: #111;
+        }
+
+        .qualia-youtube-title {
+
+            font-size: 32px;
+
+            margin-bottom: 15px;
+        }
+
+        .qualia-youtube-name {
+
+            font-size: 15px;
+
+            opacity: 0.55;
+        }
+
+        .qualia-youtube-arrow {
+
+            margin-top: 35px;
+
+            font-size: 20px;
+
+            opacity: 0.5;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .intro-logo {
+
+                width: 400px;
+
+                max-width: 80vw;
+            }
+
+            .logo {
+
+                width: 300px;
+
+                max-width: 80vw;
+            }
+
+            .email {
+
+                font-size: 16px;
+            }
+
+            .clip {
+
+                flex:
+                    0 0 88vw;
+            }
+
+            .credit-card,
+            .spotify-card,
+            .soundcloud-card {
+
+                flex:
+                    0 0 88vw;
+
+                height: 280px;
+            }
+
+            .instagram-link {
+
+                font-size: 30px;
+            }
+
+            .untitled-container {
+
+                gap: 35px;
+
+                flex-wrap: wrap;
+            }
+
+            .qualia-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .qualia-box {
+
+                height: 420px;
+            }
+
+            .qualia-instagram-title,
+            .qualia-youtube-title {
+
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         ÉCRAN D'INTRODUCTION
+    ===================================================== -->
+
+    <div class="intro-screen">
+
+        <img
+            src="assets/logo kalifa.png"
+            class="intro-logo"
+            alt="JNWLKALIFA"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         NOM EN HAUT À GAUCHE
+    ===================================================== -->
+
+    <div class="site-name">
+
+        JNWLKALIFA
+
+    </div>
+
+
+    <!-- =====================================================
+         LOGO + EMAIL
+    ===================================================== -->
+
+    <div class="logo-container">
+
+        <img
+            src="assets/logo kalifa.png"
+            alt="JNWLKALIFA"
+            class="logo"
+            id="logo"
+        >
+
+        <a
+            class="email"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            333kalifa@gmail.com
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         SECTION CLIP YOUTUBE
+    ===================================================== -->
+
+    <section class="clips-section">
+
+        <div class="section-title">
+
+            CLIP YOUTUBE
+
+        </div>
+
+
+        <div class="horizontal-wrapper">
+
+
+            <button
+                class="scroll-button scroll-left"
+                id="scroll-left-clips"
+            >
+
+                ←
+
+            </button>
+
+
+            <div
+                class="horizontal-container"
+                id="clips-container"
+            >
+
+
+                <!-- CLIP 01 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/MvwBgrpb_zY"
+                        title="Clip YouTube 01"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <!-- CLIP 02 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/Z3FNjSBlOBw"
+                        title="Clip YouTube 02"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <!-- CLIP 03 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/Dr4TMMzYIP8"
+                        title="Clip YouTube 03"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <!-- CLIP 04 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/HV0eSCzyPRI"
+                        title="Clip YouTube 04"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <!-- CLIP 05 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/S0FWBMS7t6k"
+                        title="Clip YouTube 05"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <!-- CLIP 06 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/jvVhQVrdKzY"
+                        title="Clip YouTube 06"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <!-- CLIP 07 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/_tJKQ0WCCEw"
+                        title="Clip YouTube 07"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <!-- CLIP 08 -->
+
+                <div class="clip">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/wkqTX-3e-2U"
+                        title="Clip YouTube 08"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="scroll-button scroll-right"
+                id="scroll-right-clips"
+            >
+
+                →
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CRÉDITS
+    ===================================================== -->
+
+    <section class="credits-section">
+
+        <div class="section-title">
+
+            CRÉDITS
+
+        </div>
+
+
+        <div class="horizontal-wrapper">
+
+
+            <button
+                class="scroll-button scroll-left"
+                id="scroll-left-credits"
+            >
+
+                ←
+
+            </button>
+
+
+            <div
+                class="horizontal-container"
+                id="credits-container"
+            >
+
+
+                <!-- MUSO.AI -->
+
+                <a
+                    class="credit-card"
+                    href="https://muso.ai/profile/c1360274-4da0-47fd-bc9e-a34f0ab0f511"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <div class="credit-name">
+
+                        MUSO.AI
+
+                    </div>
+
+                    <div class="credit-description">
+
+                        Voir les crédits
+                        et collaborations
+
+                    </div>
+
+                    <div class="credit-arrow">
+
+                        ↗
+
+                    </div>
+
+                </a>
+
+
+                <!-- SPOTIFY -->
+
+                <div class="spotify-card">
+
+                    <iframe
+                        src="https://open.spotify.com/embed/playlist/55tUZnCILFdGp8u8O1z31E?utm_source=generator"
+                        title="Playlist Spotify"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy">
+                    </iframe>
+
+                </div>
+
+
+                <!-- SOUNDCLOUD -->
+
+                <div class="soundcloud-card">
+
+                    <iframe
+                        scrolling="no"
+                        frameborder="no"
+                        allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lsoet/sets/mixe-par-kalifa&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+                        title="Mixe par Kalifa">
+                    </iframe>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="scroll-button scroll-right"
+                id="scroll-right-credits"
+            >
+
+                →
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INSTAGRAM MAPLUSTP
+    ===================================================== -->
+
+    <div class="instagram-container">
+
+        <a
+            class="instagram-link"
+            href="https://www.instagram.com/maplustp/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            @maplustp
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         UNTITLED
+    ===================================================== -->
+
+    <div class="untitled-container">
+
+
+        <a
+            class="untitled-link"
+            href="https://untitled.stream/library/project/gate44hTl4t2uCsDs3h7Q"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            UNTITLED PROD
+
+        </a>
+
+
+        <a
+            class="untitled-link"
+            href="https://untitled.stream/library/project/5nNT2RCAy8tt4vDXOg2ji"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            UNTITLED MIX
+
+        </a>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         COURT METRAGES
+    ===================================================== -->
+
+    <div class="short-films-container">
+
+        <a
+            class="short-films-link"
+            href="https://linktr.ee/lucasfaucheuxppsaudiovisuelle"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            COURT METRAGES
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         QUALIA
+    ===================================================== -->
+
+    <section class="qualia-section">
+
+
+        <div class="qualia-title">
+
+            QUALIA
+
+        </div>
+
+
+        <div class="qualia-grid">
+
+
+            <!-- INSTAGRAM QUALIA -->
+
+            <a
+                class="qualia-box qualia-instagram"
+                href="https://www.instagram.com/qualiaqualiaqualia/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="qualia-instagram-title">
+
+                    INSTAGRAM
+
+                </div>
+
+                <div class="qualia-instagram-name">
+
+                    @qualiaqualiaqualia
+
+                </div>
+
+                <div class="qualia-instagram-arrow">
+
+                    ↗
+
+                </div>
+
+            </a>
+
+
+            <!-- YOUTUBE QUALIA -->
+
+            <a
+                class="qualia-box qualia-youtube"
+                href="https://www.youtube.com/@QUALIA-n3m"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="qualia-youtube-title">
+
+                    YOUTUBE
+
+                </div>
+
+                <div class="qualia-youtube-name">
+
+                    @QUALIA-n3m
+
+                </div>
+
+                <div class="qualia-youtube-arrow">
+
+                    ↗
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         AUDIO DU LOGO
+    ===================================================== -->
+
+    <audio
+        id="logo-sound"
+        preload="auto"
+    >
+
+        <source
+            src="assets/c'est pour toi.wav"
+            type="audio/wav"
+        >
+
+    </audio>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           SON DU LOGO
+        ===================================================== */
+
+        const logo =
+            document.getElementById("logo");
+
+        const sound =
+            document.getElementById("logo-sound");
+
+
+        logo.addEventListener(
+            "mouseenter",
+            function() {
+
+                sound.currentTime = 0;
+
+                sound.play();
+
+            }
+        );
+
+
+        /* =====================================================
+           SCROLL CLIPS
+        ===================================================== */
+
+        const clipsContainer =
+            document.getElementById("clips-container");
+
+
+        document
+            .getElementById("scroll-left-clips")
+            .addEventListener(
+                "click",
+                function() {
+
+                    clipsContainer.scrollBy({
+
+                        left:
+                            -window.innerWidth * 0.65,
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                }
+            );
+
+
+        document
+            .getElementById("scroll-right-clips")
+            .addEventListener(
+                "click",
+                function() {
+
+                    clipsContainer.scrollBy({
+
+                        left:
+                            window.innerWidth * 0.65,
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                }
+            );
+
+
+        /* =====================================================
+           SCROLL CRÉDITS
+        ===================================================== */
+
+        const creditsContainer =
+            document.getElementById("credits-container");
+
+
+        document
+            .getElementById("scroll-left-credits")
+            .addEventListener(
+                "click",
+                function() {
+
+                    creditsContainer.scrollBy({
+
+                        left:
+                            -window.innerWidth * 0.65,
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                }
+            );
+
+
+        document
+            .getElementById("scroll-right-credits")
+            .addEventListener(
+                "click",
+                function() {
+
+                    creditsContainer.scrollBy({
+
+                        left:
+                            window.innerWidth * 0.65,
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                }
+            );
+
+
+    </script>
+
+
+</body>
+
+</html>
