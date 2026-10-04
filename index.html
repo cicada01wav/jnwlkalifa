@@ -4,11 +4,19 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>JNWLKALIFA</title>
 
     <style>
+
+        /* =====================================================
+           BASE
+        ===================================================== */
 
         * {
             margin: 0;
@@ -23,10 +31,104 @@
         body {
             background: #000;
             color: #fff;
-            width: 100%;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
             min-height: 100vh;
+
             overflow-x: hidden;
-            font-family: Arial, Helvetica, sans-serif;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+
+        /* =====================================================
+           CURSEUR / HALO
+        ===================================================== */
+
+        .cursor-glow {
+
+            position: fixed;
+
+            width: 380px;
+            height: 380px;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 0;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.035) 0%,
+                    rgba(255,255,255,0.012) 28%,
+                    rgba(255,255,255,0) 70%
+                );
+
+            transform:
+                translate(-50%, -50%);
+
+            transition:
+                left 0.12s ease-out,
+                top 0.12s ease-out;
+
+            opacity: 0.7;
+        }
+
+
+        /* =====================================================
+           GRAIN TRÈS LÉGER
+        ===================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 50;
+
+            opacity: 0.025;
+
+            background-image:
+                url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+
+            animation:
+                grainMove 0.25s infinite;
+        }
+
+        @keyframes grainMove {
+
+            0% {
+                transform: translate(0,0);
+            }
+
+            25% {
+                transform: translate(-1%,1%);
+            }
+
+            50% {
+                transform: translate(1%,-1%);
+            }
+
+            75% {
+                transform: translate(-1%,-1%);
+            }
+
+            100% {
+                transform: translate(0,0);
+            }
+
         }
 
 
@@ -34,8 +136,10 @@
            INTRO
         ===================================================== */
 
-        .intro-screen {
+        .intro {
+
             position: fixed;
+
             inset: 0;
 
             width: 100%;
@@ -44,45 +148,63 @@
             background: #000;
 
             display: flex;
-            justify-content: center;
+
             align-items: center;
+            justify-content: center;
 
             z-index: 1000;
 
-            animation: introFade 1.5s ease forwards;
-            animation-delay: 1s;
+            animation:
+                introDisappear
+                1.5s
+                cubic-bezier(0.77,0,0.175,1)
+                forwards;
+
+            animation-delay: 1.35s;
         }
 
         .intro-logo {
-            width: 500px;
-            max-width: 75vw;
+
+            width: 520px;
+
+            max-width: 78vw;
 
             opacity: 0;
 
+            transform:
+                scale(0.88);
+
             animation:
-                introLogoAppear
-                0.9s
-                ease
+                introLogo
+                1.1s
+                cubic-bezier(0.22,1,0.36,1)
                 forwards;
         }
 
-        @keyframes introLogoAppear {
+        @keyframes introLogo {
 
             0% {
                 opacity: 0;
-                transform: scale(0.90);
+                transform: scale(0.88);
+                filter: blur(8px);
             }
 
             100% {
                 opacity: 1;
                 transform: scale(1);
+                filter: blur(0);
             }
 
         }
 
-        @keyframes introFade {
+        @keyframes introDisappear {
 
             0% {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            70% {
                 opacity: 1;
             }
 
@@ -96,32 +218,80 @@
 
 
         /* =====================================================
-           NOM
+           HEADER
         ===================================================== */
 
-        .site-name {
+        .top-header {
 
             position: fixed;
 
-            top: 15px;
-            left: 15px;
+            top: 0;
+            left: 0;
 
-            font-size: 12px;
+            width: 100%;
 
-            color: #fff;
+            padding:
+                18px
+                20px;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: flex-start;
 
             z-index: 100;
+
+            pointer-events: none;
+
+            mix-blend-mode: difference;
+        }
+
+        .brand {
+
+            font-size: 11px;
+
+            letter-spacing:
+                0.14em;
+
+            font-weight: 400;
+
+            text-transform: uppercase;
+        }
+
+        .counter {
+
+            font-size: 10px;
+
+            letter-spacing:
+                0.12em;
+
+            opacity: 0.55;
         }
 
 
         /* =====================================================
-           LOGO PRINCIPAL
+           CONTENU PRINCIPAL
         ===================================================== */
 
-        .logo-container {
+        main {
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+
+            min-height: 100vh;
 
             width: 100%;
-            height: 100vh;
 
             display: flex;
 
@@ -130,22 +300,43 @@
             justify-content: center;
             align-items: center;
 
-            opacity: 0;
+            padding:
+                60px
+                20px
+                100px;
 
-            animation:
-                mainContentAppear
-                1.5s
-                ease
-                forwards;
-
-            animation-delay: 1.2s;
+            position: relative;
         }
 
-        @keyframes mainContentAppear {
+        .hero-inner {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            transform:
+                translateY(20px);
+
+            animation:
+                heroAppear
+                1.8s
+                cubic-bezier(0.22,1,0.36,1)
+                forwards;
+
+            animation-delay: 1.55s;
+        }
+
+        @keyframes heroAppear {
 
             0% {
                 opacity: 0;
-                transform: translateY(18px);
+                transform: translateY(20px);
             }
 
             100% {
@@ -155,16 +346,34 @@
 
         }
 
-        .logo {
+        .main-logo {
 
-            width: 400px;
-            max-width: 80vw;
+            width: 430px;
+
+            max-width: 78vw;
 
             height: auto;
 
+            cursor: pointer;
+
             display: block;
 
-            cursor: pointer;
+            transition:
+                transform 0.8s
+                cubic-bezier(0.22,1,0.36,1),
+
+                opacity 0.5s ease,
+
+                filter 0.8s ease;
+        }
+
+        .main-logo:hover {
+
+            transform:
+                scale(1.025);
+
+            filter:
+                brightness(1.08);
         }
 
 
@@ -174,200 +383,314 @@
 
         .email {
 
-            display: block;
-
-            margin-top: 22px;
-
-            font-size: 18px;
+            margin-top: 30px;
 
             color: #fff;
 
             text-decoration: none;
 
+            font-size: 18px;
+
+            letter-spacing:
+                0.02em;
+
+            font-weight: 300;
+
+            position: relative;
+
+            opacity: 0.78;
+
             transition:
-                opacity 0.3s ease;
+                opacity 0.4s ease;
+        }
+
+        .email::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -5px;
+
+            width: 100%;
+            height: 1px;
+
+            background: #fff;
+
+            transform:
+                scaleX(0);
+
+            transform-origin:
+                right;
+
+            transition:
+                transform 0.5s
+                cubic-bezier(0.22,1,0.36,1);
         }
 
         .email:hover {
-            opacity: 0.55;
+
+            opacity: 1;
+        }
+
+        .email:hover::after {
+
+            transform:
+                scaleX(1);
+
+            transform-origin:
+                left;
         }
 
 
         /* =====================================================
-           TITRES DE SECTIONS
+           SECTIONS
         ===================================================== */
 
-        .section-title {
-
-            font-size: 12px;
-
-            font-weight: normal;
-
-            color: #fff;
-
-            margin-bottom: 20px;
-        }
-
-
-        /* =====================================================
-           CLIP YOUTUBE
-        ===================================================== */
-
-        .clips-section {
+        .section {
 
             width: 100%;
 
             padding:
-                60px
-                15px
-                100px;
-
-            position: relative;
+                120px
+                20px;
 
             opacity: 0;
 
-            transform: translateY(45px);
+            transform:
+                translateY(45px);
 
-            filter: blur(8px);
+            filter:
+                blur(7px);
 
-            animation:
-                clipsAppear
-                1.8s
-                cubic-bezier(0.22, 1, 0.36, 1)
-                forwards;
+            transition:
+                opacity 1.2s
+                cubic-bezier(0.22,1,0.36,1),
 
-            animation-delay: 1.65s;
+                transform 1.2s
+                cubic-bezier(0.22,1,0.36,1),
+
+                filter 1.2s
+                cubic-bezier(0.22,1,0.36,1);
         }
 
-        @keyframes clipsAppear {
+        .section.visible {
 
-            0% {
-                opacity: 0;
-                transform: translateY(45px);
-                filter: blur(8px);
-            }
+            opacity: 1;
 
-            60% {
-                opacity: 0.7;
-                filter: blur(2px);
-            }
+            transform:
+                translateY(0);
 
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-
+            filter:
+                blur(0);
         }
 
 
         /* =====================================================
-           CONTENEUR HORIZONTAL
+           SECTION HEADER
         ===================================================== */
 
-        .horizontal-wrapper {
-
-            position: relative;
+        .section-header {
 
             width: 100%;
+
+            max-width: 1500px;
+
+            margin:
+                0 auto 28px;
+
+            display: flex;
+
+            align-items: baseline;
+
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.14);
+
+            padding-bottom: 11px;
         }
 
-        .horizontal-container {
+        .section-title {
+
+            font-size: 10px;
+
+            letter-spacing:
+                0.18em;
+
+            text-transform:
+                uppercase;
+
+            font-weight: 400;
+        }
+
+        .section-number {
+
+            font-size: 9px;
+
+            letter-spacing:
+                0.12em;
+
+            opacity: 0.35;
+        }
+
+
+        /* =====================================================
+           SCROLL WRAPPER
+        ===================================================== */
+
+        .scroll-wrapper {
+
+            width: 100%;
+
+            max-width: 1500px;
+
+            margin: 0 auto;
+
+            position: relative;
+        }
+
+        .horizontal-scroll {
 
             width: 100%;
 
             display: flex;
 
-            gap: 15px;
+            gap: 18px;
 
             overflow-x: auto;
+
             overflow-y: hidden;
 
             scroll-behavior: smooth;
 
-            padding-bottom: 10px;
-
             scrollbar-width: none;
+
+            padding:
+                4px 0
+                16px;
         }
 
-        .horizontal-container::-webkit-scrollbar {
+        .horizontal-scroll::-webkit-scrollbar {
             display: none;
         }
 
 
         /* =====================================================
-           VIDEOS
+           FLÈCHES
         ===================================================== */
 
-        .clip {
+        .arrow {
 
-            flex:
-                0 0 60vw;
+            position: absolute;
 
-            max-width: 900px;
+            top: 50%;
 
-            aspect-ratio: 16 / 9;
+            transform:
+                translateY(-50%);
 
-            background: #111;
+            z-index: 10;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid
+                rgba(255,255,255,0.25);
+
+            border-radius: 50%;
+
+            background:
+                rgba(0,0,0,0.55);
+
+            color: #fff;
+
+            font-size: 20px;
+
+            font-weight: 200;
+
+            cursor: pointer;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
 
             opacity: 0;
 
-            transform: translateX(25px);
+            transition:
+                opacity 0.35s ease,
 
-            animation:
-                clipAppear
-                1.3s
-                cubic-bezier(0.22, 1, 0.36, 1)
-                forwards;
+                background 0.35s ease,
+
+                transform 0.35s ease;
         }
 
-        .clip:nth-child(1) {
-            animation-delay: 1.9s;
+        .scroll-wrapper:hover .arrow {
+
+            opacity: 1;
         }
 
-        .clip:nth-child(2) {
-            animation-delay: 2.0s;
+        .arrow:hover {
+
+            background:
+                rgba(255,255,255,0.1);
+
+            transform:
+                translateY(-50%)
+                scale(1.08);
         }
 
-        .clip:nth-child(3) {
-            animation-delay: 2.1s;
+        .arrow.left {
+            left: 14px;
         }
 
-        .clip:nth-child(4) {
-            animation-delay: 2.2s;
+        .arrow.right {
+            right: 14px;
         }
 
-        .clip:nth-child(5) {
-            animation-delay: 2.3s;
+
+        /* =====================================================
+           CLIPS YOUTUBE
+        ===================================================== */
+
+        .clip-card {
+
+            flex:
+                0 0 min(68vw, 900px);
+
+            aspect-ratio:
+                16 / 9;
+
+            background:
+                #080808;
+
+            overflow: hidden;
+
+            position: relative;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            transition:
+                transform 0.7s
+                cubic-bezier(0.22,1,0.36,1),
+
+                border-color 0.4s ease;
         }
 
-        .clip:nth-child(6) {
-            animation-delay: 2.4s;
+        .clip-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(255,255,255,0.22);
         }
 
-        .clip:nth-child(7) {
-            animation-delay: 2.5s;
-        }
-
-        .clip:nth-child(8) {
-            animation-delay: 2.6s;
-        }
-
-        @keyframes clipAppear {
-
-            0% {
-                opacity: 0;
-                transform: translateX(25px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-        }
-
-        .clip iframe {
+        .clip-card iframe {
 
             width: 100%;
             height: 100%;
@@ -379,127 +702,22 @@
 
 
         /* =====================================================
-           FLECHES
-        ===================================================== */
-
-        .scroll-button {
-
-            position: absolute;
-
-            top: 50%;
-
-            transform: translateY(-50%);
-
-            width: 45px;
-            height: 45px;
-
-            border: none;
-
-            background:
-                rgba(0, 0, 0, 0.75);
-
-            color: #fff;
-
-            font-size: 25px;
-
-            cursor: pointer;
-
-            z-index: 10;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            transition:
-                opacity 0.3s ease,
-                background 0.3s ease;
-        }
-
-        .scroll-button:hover {
-
-            opacity: 0.6;
-
-            background:
-                rgba(0, 0, 0, 0.95);
-        }
-
-        .scroll-left {
-            left: 10px;
-        }
-
-        .scroll-right {
-            right: 10px;
-        }
-
-
-        /* =====================================================
            CRÉDITS
-        ===================================================== */
-
-        .credits-section {
-
-            width: 100%;
-
-            padding:
-                80px
-                15px
-                120px;
-
-            position: relative;
-
-            opacity: 0;
-
-            transform: translateY(50px);
-
-            filter: blur(8px);
-
-            animation:
-                creditsAppear
-                1.8s
-                cubic-bezier(0.22, 1, 0.36, 1)
-                forwards;
-
-            animation-delay: 2.7s;
-        }
-
-        @keyframes creditsAppear {
-
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-                filter: blur(8px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-
-        }
-
-
-        /* =====================================================
-           CARTE MUSO
         ===================================================== */
 
         .credit-card {
 
             flex:
-                0 0 420px;
+                0 0 430px;
 
             height: 300px;
 
-            background: #111;
+            background:
+                #080808;
 
-            position: relative;
-
-            overflow: hidden;
-
-            text-decoration: none;
-
-            color: #fff;
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
 
             display: flex;
 
@@ -508,57 +726,83 @@
             justify-content: center;
             align-items: center;
 
+            position: relative;
+
+            text-decoration: none;
+
+            color: #fff;
+
+            overflow: hidden;
+
             transition:
-                background 0.4s ease;
+                transform 0.7s
+                cubic-bezier(0.22,1,0.36,1),
+
+                background 0.5s ease,
+
+                border-color 0.5s ease;
         }
 
         .credit-card:hover {
-            background: #181818;
+
+            transform:
+                translateY(-5px);
+
+            background:
+                #0d0d0d;
+
+            border-color:
+                rgba(255,255,255,0.2);
         }
 
-        .credit-name {
+        .credit-main {
 
-            font-size: 22px;
+            font-size: 24px;
 
-            letter-spacing: 1px;
+            letter-spacing:
+                0.03em;
 
-            margin-bottom: 15px;
+            font-weight: 300;
         }
 
-        .credit-description {
+        .credit-sub {
 
-            font-size: 12px;
+            margin-top: 14px;
 
-            opacity: 0.6;
+            font-size: 10px;
 
-            text-align: center;
+            letter-spacing:
+                0.13em;
 
-            max-width: 280px;
+            text-transform:
+                uppercase;
 
-            line-height: 1.5;
+            opacity: 0.4;
         }
 
         .credit-arrow {
 
             position: absolute;
 
-            bottom: 20px;
-            right: 20px;
+            right: 18px;
+            bottom: 17px;
 
-            font-size: 18px;
+            font-size: 15px;
 
-            opacity: 0.5;
+            opacity: 0.35;
 
             transition:
-                opacity 0.3s ease,
-                transform 0.3s ease;
+                opacity 0.4s ease,
+
+                transform 0.4s ease;
         }
 
         .credit-card:hover .credit-arrow {
 
             opacity: 1;
 
-            transform: translateX(5px);
+            transform:
+                translate(3px,-3px);
         }
 
 
@@ -569,13 +813,18 @@
         .spotify-card {
 
             flex:
-                0 0 420px;
+                0 0 430px;
 
             height: 300px;
 
-            background: #000;
-
             overflow: hidden;
+
+            background:
+                #000;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
         }
 
         .spotify-card iframe {
@@ -594,13 +843,18 @@
         .soundcloud-card {
 
             flex:
-                0 0 420px;
+                0 0 430px;
 
             height: 300px;
 
-            background: #000;
-
             overflow: hidden;
+
+            background:
+                #000;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
         }
 
         .soundcloud-card iframe {
@@ -616,73 +870,85 @@
            INSTAGRAM MAPLUSTP
         ===================================================== */
 
-        .instagram-container {
+        .social-section {
 
             width: 100%;
 
             padding:
-                100px
+                80px
                 20px
                 50px;
 
             display: flex;
 
             justify-content: center;
-            align-items: center;
-
-            opacity: 0;
-
-            transform: translateY(45px);
-
-            filter: blur(8px);
-
-            animation:
-                instagramAppear
-                1.8s
-                cubic-bezier(0.22, 1, 0.36, 1)
-                forwards;
-
-            animation-delay: 3.6s;
         }
 
-        @keyframes instagramAppear {
-
-            0% {
-                opacity: 0;
-                transform: translateY(45px);
-                filter: blur(8px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-
-        }
-
-        .instagram-link {
-
-            display: inline-block;
+        .social-link {
 
             color: #fff;
 
             text-decoration: none;
 
-            font-size: 42px;
+            font-size:
+                clamp(30px, 5vw, 58px);
 
-            letter-spacing: -1px;
+            letter-spacing:
+                -0.035em;
+
+            font-weight: 300;
+
+            position: relative;
 
             transition:
                 opacity 0.4s ease,
-                transform 0.4s ease;
+
+                transform 0.5s
+                cubic-bezier(0.22,1,0.36,1);
         }
 
-        .instagram-link:hover {
+        .social-link::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: -9px;
+
+            height: 1px;
+
+            background:
+                rgba(255,255,255,0.7);
+
+            transform:
+                scaleX(0);
+
+            transform-origin:
+                right;
+
+            transition:
+                transform 0.6s
+                cubic-bezier(0.22,1,0.36,1);
+        }
+
+        .social-link:hover {
 
             opacity: 0.65;
 
-            transform: translateY(-3px);
+            transform:
+                translateY(-3px);
+        }
+
+        .social-link:hover::after {
+
+            transform:
+                scaleX(1);
+
+            transform-origin:
+                left;
         }
 
 
@@ -690,7 +956,7 @@
            UNTITLED
         ===================================================== */
 
-        .untitled-container {
+        .untitled-section {
 
             width: 100%;
 
@@ -702,61 +968,71 @@
             display: flex;
 
             justify-content: center;
+
             align-items: center;
 
-            gap: 70px;
-
-            opacity: 0;
-
-            transform: translateY(35px);
-
-            filter: blur(8px);
-
-            animation:
-                untitledAppear
-                1.6s
-                cubic-bezier(0.22, 1, 0.36, 1)
-                forwards;
-
-            animation-delay: 3.9s;
-        }
-
-        @keyframes untitledAppear {
-
-            0% {
-                opacity: 0;
-                transform: translateY(35px);
-                filter: blur(8px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-
+            gap: 80px;
         }
 
         .untitled-link {
-
-            position: relative;
 
             color: #fff;
 
             text-decoration: none;
 
-            font-size: 18px;
+            font-size: 14px;
+
+            letter-spacing:
+                0.12em;
+
+            text-transform:
+                uppercase;
+
+            opacity: 0.75;
+
+            position: relative;
 
             transition:
-                opacity 0.4s ease,
-                transform 0.4s ease;
+                opacity 0.4s ease;
+        }
+
+        .untitled-link::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -5px;
+
+            width: 100%;
+            height: 1px;
+
+            background: #fff;
+
+            transform:
+                scaleX(0);
+
+            transform-origin:
+                right;
+
+            transition:
+                transform 0.45s
+                cubic-bezier(0.22,1,0.36,1);
         }
 
         .untitled-link:hover {
 
-            opacity: 0.6;
+            opacity: 1;
+        }
 
-            transform: translateY(-2px);
+        .untitled-link:hover::after {
+
+            transform:
+                scaleX(1);
+
+            transform-origin:
+                left;
         }
 
 
@@ -764,69 +1040,48 @@
            COURT METRAGES
         ===================================================== */
 
-        .short-films-container {
+        .short-film-section {
 
             width: 100%;
 
             padding:
                 25px
                 20px
-                90px;
+                100px;
 
             display: flex;
 
             justify-content: center;
-            align-items: center;
-
-            opacity: 0;
-
-            transform: translateY(35px);
-
-            filter: blur(8px);
-
-            animation:
-                shortFilmsAppear
-                1.6s
-                cubic-bezier(0.22, 1, 0.36, 1)
-                forwards;
-
-            animation-delay: 4.1s;
         }
 
-        @keyframes shortFilmsAppear {
-
-            0% {
-                opacity: 0;
-                transform: translateY(35px);
-                filter: blur(8px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-
-        }
-
-        .short-films-link {
+        .short-film-link {
 
             color: #fff;
 
             text-decoration: none;
 
-            font-size: 18px;
+            font-size: 14px;
+
+            letter-spacing:
+                0.13em;
+
+            text-transform:
+                uppercase;
+
+            opacity: 0.7;
 
             transition:
                 opacity 0.4s ease,
+
                 transform 0.4s ease;
         }
 
-        .short-films-link:hover {
+        .short-film-link:hover {
 
-            opacity: 0.6;
+            opacity: 1;
 
-            transform: translateY(-2px);
+            transform:
+                translateY(-2px);
         }
 
 
@@ -839,207 +1094,216 @@
             width: 100%;
 
             padding:
-                50px
+                90px
                 20px
-                160px;
-
-            opacity: 0;
-
-            transform: translateY(50px);
-
-            filter: blur(8px);
-
-            animation:
-                qualiaAppear
-                1.8s
-                cubic-bezier(0.22, 1, 0.36, 1)
-                forwards;
-
-            animation-delay: 4.4s;
-        }
-
-        @keyframes qualiaAppear {
-
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-                filter: blur(8px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
-
-        }
-
-        .qualia-title {
-
-            font-size: 12px;
-
-            margin-bottom: 30px;
+                180px;
         }
 
         .qualia-grid {
 
-            width: 100%;
+            max-width: 1500px;
 
-            max-width: 1200px;
-
-            margin: auto;
+            margin: 0 auto;
 
             display: grid;
 
             grid-template-columns:
                 1fr 1fr;
 
-            gap: 20px;
+            gap: 18px;
         }
-
-
-        /* =====================================================
-           QUALIA INSTAGRAM
-        ===================================================== */
 
         .qualia-box {
 
-            width: 100%;
+            min-height: 430px;
 
-            height: 500px;
-
-            background: #080808;
+            background:
+                #080808;
 
             border:
-                1px solid #151515;
+                1px solid
+                rgba(255,255,255,0.09);
 
-            overflow: hidden;
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-decoration: none;
+
+            color: #fff;
 
             position: relative;
-        }
-
-        .qualia-instagram {
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-            align-items: center;
-
-            text-decoration: none;
-
-            color: #fff;
 
             transition:
-                background 0.4s ease;
+                transform 0.7s
+                cubic-bezier(0.22,1,0.36,1),
+
+                background 0.5s ease,
+
+                border-color 0.5s ease;
         }
 
-        .qualia-instagram:hover {
+        .qualia-box:hover {
 
-            background: #111;
+            transform:
+                translateY(-5px);
+
+            background:
+                #0d0d0d;
+
+            border-color:
+                rgba(255,255,255,0.2);
         }
 
-        .qualia-instagram-title {
+        .qualia-type {
 
-            font-size: 32px;
+            font-size: 9px;
 
-            margin-bottom: 15px;
+            letter-spacing:
+                0.18em;
+
+            text-transform:
+                uppercase;
+
+            opacity: 0.35;
+
+            margin-bottom: 18px;
         }
 
-        .qualia-instagram-name {
+        .qualia-name {
 
-            font-size: 15px;
+            font-size:
+                clamp(24px, 3vw, 42px);
 
-            opacity: 0.55;
+            font-weight: 300;
+
+            letter-spacing:
+                -0.025em;
         }
 
-        .qualia-instagram-arrow {
+        .qualia-arrow {
 
-            margin-top: 35px;
+            position: absolute;
 
-            font-size: 20px;
+            bottom: 20px;
+            right: 22px;
 
-            opacity: 0.5;
+            opacity: 0.35;
+
+            transition:
+                opacity 0.4s ease,
+
+                transform 0.4s ease;
+        }
+
+        .qualia-box:hover .qualia-arrow {
+
+            opacity: 1;
+
+            transform:
+                translate(3px,-3px);
         }
 
 
         /* =====================================================
-           QUALIA YOUTUBE
+           FOOTER
         ===================================================== */
 
-        .qualia-youtube {
+        footer {
+
+            width: 100%;
+
+            padding:
+                30px
+                20px
+                35px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.08);
 
             display: flex;
 
-            flex-direction: column;
+            justify-content:
+                space-between;
 
-            justify-content: center;
             align-items: center;
 
-            text-decoration: none;
+            font-size: 9px;
+
+            letter-spacing:
+                0.12em;
+
+            text-transform:
+                uppercase;
+
+            opacity: 0.4;
+        }
+
+        footer a {
 
             color: #fff;
 
-            transition:
-                background 0.4s ease;
+            text-decoration: none;
         }
 
-        .qualia-youtube:hover {
-
-            background: #111;
-        }
-
-        .qualia-youtube-title {
-
-            font-size: 32px;
-
-            margin-bottom: 15px;
-        }
-
-        .qualia-youtube-name {
-
-            font-size: 15px;
-
-            opacity: 0.55;
-        }
-
-        .qualia-youtube-arrow {
-
-            margin-top: 35px;
-
-            font-size: 20px;
-
-            opacity: 0.5;
+        footer a:hover {
+            opacity: 0.6;
         }
 
 
         /* =====================================================
-           MOBILE
+           RESPONSIVE
         ===================================================== */
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
-            .intro-logo {
+            .top-header {
 
-                width: 400px;
-
-                max-width: 80vw;
+                padding:
+                    15px;
             }
 
-            .logo {
+            .counter {
+                display: none;
+            }
 
-                width: 300px;
+            .hero {
 
-                max-width: 80vw;
+                padding:
+                    50px
+                    15px
+                    80px;
+            }
+
+            .main-logo {
+
+                width: 320px;
             }
 
             .email {
 
-                font-size: 16px;
+                font-size: 15px;
+
+                margin-top: 24px;
             }
 
-            .clip {
+            .section {
+
+                padding:
+                    80px
+                    15px;
+            }
+
+            .section-header {
+
+                margin-bottom: 20px;
+            }
+
+            .clip-card {
 
                 flex:
                     0 0 88vw;
@@ -1052,19 +1316,51 @@
                 flex:
                     0 0 88vw;
 
-                height: 280px;
+                height: 270px;
             }
 
-            .instagram-link {
+            .arrow {
 
-                font-size: 30px;
+                opacity: 0.8;
+
+                width: 38px;
+                height: 38px;
             }
 
-            .untitled-container {
+            .arrow.left {
+                left: 8px;
+            }
+
+            .arrow.right {
+                right: 8px;
+            }
+
+            .social-section {
+
+                padding:
+                    60px
+                    15px
+                    35px;
+            }
+
+            .untitled-section {
 
                 gap: 35px;
 
                 flex-wrap: wrap;
+            }
+
+            .short-film-section {
+
+                padding-bottom: 80px;
+            }
+
+            .qualia-section {
+
+                padding:
+                    70px
+                    15px
+                    120px;
             }
 
             .qualia-grid {
@@ -1075,13 +1371,41 @@
 
             .qualia-box {
 
-                height: 420px;
+                min-height: 330px;
             }
 
-            .qualia-instagram-title,
-            .qualia-youtube-title {
+            footer {
 
-                font-size: 26px;
+                flex-direction: column;
+
+                gap: 15px;
+
+                text-align: center;
+            }
+
+        }
+
+
+        /* =====================================================
+           RÉDUCTION DES ANIMATIONS
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration: 0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+
+                scroll-behavior:
+                    auto !important;
             }
 
         }
@@ -1095,484 +1419,532 @@
 
 
     <!-- =====================================================
-         ÉCRAN D'INTRODUCTION
+         HALO SOURIS
     ===================================================== -->
 
-    <div class="intro-screen">
+    <div
+        class="cursor-glow"
+        id="cursorGlow">
+    </div>
+
+
+    <!-- =====================================================
+         INTRO
+    ===================================================== -->
+
+    <div class="intro">
 
         <img
             src="assets/logo kalifa.png"
+            alt="JNWLKALIFA"
             class="intro-logo"
-            alt="JNWLKALIFA"
         >
 
     </div>
 
 
     <!-- =====================================================
-         NOM EN HAUT À GAUCHE
+         HEADER
     ===================================================== -->
 
-    <div class="site-name">
+    <header class="top-header">
 
-        JNWLKALIFA
-
-    </div>
-
-
-    <!-- =====================================================
-         LOGO + EMAIL
-    ===================================================== -->
-
-    <div class="logo-container">
-
-        <img
-            src="assets/logo kalifa.png"
-            alt="JNWLKALIFA"
-            class="logo"
-            id="logo"
-        >
-
-        <a
-            class="email"
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-
-            333kalifa@gmail.com
-
-        </a>
-
-    </div>
-
-
-    <!-- =====================================================
-         SECTION CLIP YOUTUBE
-    ===================================================== -->
-
-    <section class="clips-section">
-
-        <div class="section-title">
-
-            CLIP YOUTUBE
-
+        <div class="brand">
+            JNWLKALIFA
         </div>
 
+        <div class="counter">
+            PORTFOLIO
+        </div>
 
-        <div class="horizontal-wrapper">
-
-
-            <button
-                class="scroll-button scroll-left"
-                id="scroll-left-clips"
-            >
-
-                ←
-
-            </button>
+    </header>
 
 
-            <div
-                class="horizontal-container"
-                id="clips-container"
-            >
+    <!-- =====================================================
+         CONTENU
+    ===================================================== -->
+
+    <main>
 
 
-                <!-- CLIP 01 -->
+        <!-- =================================================
+             HERO
+        ================================================= -->
 
-                <div class="clip">
+        <section class="hero">
 
-                    <iframe
-                        src="https://www.youtube.com/embed/MvwBgrpb_zY"
-                        title="Clip YouTube 01"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
+            <div class="hero-inner">
 
+                <img
+                    src="assets/logo kalifa.png"
+                    alt="JNWLKALIFA"
+                    class="main-logo"
+                    id="mainLogo"
+                >
+
+                <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="email"
+                >
+                    333kalifa@gmail.com
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             01 — CLIPS YOUTUBE
+        ================================================= -->
+
+        <section
+            class="section"
+            id="clips"
+        >
+
+            <div class="section-header">
+
+                <div class="section-title">
+                    CLIP YOUTUBE
                 </div>
 
-
-                <!-- CLIP 02 -->
-
-                <div class="clip">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/Z3FNjSBlOBw"
-                        title="Clip YouTube 02"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-
+                <div class="section-number">
+                    01 / 07
                 </div>
-
-
-                <!-- CLIP 03 -->
-
-                <div class="clip">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/Dr4TMMzYIP8"
-                        title="Clip YouTube 03"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-
-                <!-- CLIP 04 -->
-
-                <div class="clip">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/HV0eSCzyPRI"
-                        title="Clip YouTube 04"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-
-                <!-- CLIP 05 -->
-
-                <div class="clip">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/S0FWBMS7t6k"
-                        title="Clip YouTube 05"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-
-                <!-- CLIP 06 -->
-
-                <div class="clip">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/jvVhQVrdKzY"
-                        title="Clip YouTube 06"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-
-                <!-- CLIP 07 -->
-
-                <div class="clip">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/_tJKQ0WCCEw"
-                        title="Clip YouTube 07"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
-
-                <!-- CLIP 08 -->
-
-                <div class="clip">
-
-                    <iframe
-                        src="https://www.youtube.com/embed/wkqTX-3e-2U"
-                        title="Clip YouTube 08"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-
-                </div>
-
 
             </div>
 
 
-            <button
-                class="scroll-button scroll-right"
-                id="scroll-right-clips"
-            >
-
-                →
-
-            </button>
+            <div class="scroll-wrapper">
 
 
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CRÉDITS
-    ===================================================== -->
-
-    <section class="credits-section">
-
-        <div class="section-title">
-
-            CRÉDITS
-
-        </div>
+                <button
+                    class="arrow left"
+                    onclick="scrollLeftCustom('clipsScroll')"
+                    aria-label="Précédent"
+                >
+                    ←
+                </button>
 
 
-        <div class="horizontal-wrapper">
-
-
-            <button
-                class="scroll-button scroll-left"
-                id="scroll-left-credits"
-            >
-
-                ←
-
-            </button>
-
-
-            <div
-                class="horizontal-container"
-                id="credits-container"
-            >
-
-
-                <!-- MUSO.AI -->
-
-                <a
-                    class="credit-card"
-                    href="https://muso.ai/profile/c1360274-4da0-47fd-bc9e-a34f0ab0f511"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div
+                    class="horizontal-scroll"
+                    id="clipsScroll"
                 >
 
-                    <div class="credit-name">
 
-                        MUSO.AI
+                    <!-- CLIP 01 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/MvwBgrpb_zY"
+                            title="Clip YouTube 01"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
 
                     </div>
 
-                    <div class="credit-description">
 
-                        Voir les crédits
-                        et collaborations
+                    <!-- CLIP 02 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/Z3FNjSBlOBw"
+                            title="Clip YouTube 02"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
 
                     </div>
 
-                    <div class="credit-arrow">
 
+                    <!-- CLIP 03 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/Dr4TMMzYIP8"
+                            title="Clip YouTube 03"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+
+                    <!-- CLIP 04 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/HV0eSCzyPRI"
+                            title="Clip YouTube 04"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+
+                    <!-- CLIP 05 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/S0FWBMS7t6k"
+                            title="Clip YouTube 05"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+
+                    <!-- CLIP 06 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/jvVhQVrdKzY"
+                            title="Clip YouTube 06"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+
+                    <!-- CLIP 07 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/_tJKQ0WCCEw"
+                            title="Clip YouTube 07"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+
+                    <!-- CLIP 08 -->
+
+                    <div class="clip-card">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/wkqTX-3e-2U"
+                            title="Clip YouTube 08"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    class="arrow right"
+                    onclick="scrollRightCustom('clipsScroll')"
+                    aria-label="Suivant"
+                >
+                    →
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             02 — CRÉDITS
+        ================================================= -->
+
+        <section
+            class="section"
+            id="credits"
+        >
+
+            <div class="section-header">
+
+                <div class="section-title">
+                    CRÉDITS
+                </div>
+
+                <div class="section-number">
+                    02 / 07
+                </div>
+
+            </div>
+
+
+            <div class="scroll-wrapper">
+
+
+                <button
+                    class="arrow left"
+                    onclick="scrollLeftCustom('creditsScroll')"
+                    aria-label="Précédent"
+                >
+                    ←
+                </button>
+
+
+                <div
+                    class="horizontal-scroll"
+                    id="creditsScroll"
+                >
+
+
+                    <!-- MUSO -->
+
+                    <a
+                        href="https://muso.ai/profile/c1360274-4da0-47fd-bc9e-a34f0ab0f511"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="credit-card"
+                    >
+
+                        <div class="credit-main">
+                            MUSO.AI
+                        </div>
+
+                        <div class="credit-sub">
+                            Credits & collaborations
+                        </div>
+
+                        <div class="credit-arrow">
+                            ↗
+                        </div>
+
+                    </a>
+
+
+                    <!-- SPOTIFY -->
+
+                    <div class="spotify-card">
+
+                        <iframe
+                            src="https://open.spotify.com/embed/playlist/55tUZnCILFdGp8u8O1z31E?utm_source=generator"
+                            title="Spotify playlist"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy">
+                        </iframe>
+
+                    </div>
+
+
+                    <!-- SOUNDCLOUD -->
+
+                    <div class="soundcloud-card">
+
+                        <iframe
+                            scrolling="no"
+                            frameborder="no"
+                            allow="autoplay"
+                            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lsoet/sets/mixe-par-kalifa&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+                            title="Mixe par Kalifa">
+                        </iframe>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    class="arrow right"
+                    onclick="scrollRightCustom('creditsScroll')"
+                    aria-label="Suivant"
+                >
+                    →
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             INSTAGRAM MAPLUSTP
+        ================================================= -->
+
+        <section class="social-section">
+
+            <a
+                href="https://www.instagram.com/maplustp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+            >
+                @maplustp
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             UNTITLED
+        ================================================= -->
+
+        <section class="untitled-section">
+
+
+            <a
+                href="https://untitled.stream/library/project/gate44hTl4t2uCsDs3h7Q"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="untitled-link"
+            >
+                UNTITLED PROD
+            </a>
+
+
+            <a
+                href="https://untitled.stream/library/project/5nNT2RCAy8tt4vDXOg2ji"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="untitled-link"
+            >
+                UNTITLED MIX
+            </a>
+
+
+        </section>
+
+
+        <!-- =================================================
+             COURT METRAGES
+        ================================================= -->
+
+        <section class="short-film-section">
+
+            <a
+                href="https://linktr.ee/lucasfaucheuxppsaudiovisuelle"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="short-film-link"
+            >
+                COURT METRAGES
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             03 — QUALIA
+        ================================================= -->
+
+        <section
+            class="section qualia-section"
+            id="qualia"
+        >
+
+            <div class="section-header">
+
+                <div class="section-title">
+                    QUALIA
+                </div>
+
+                <div class="section-number">
+                    03 / 07
+                </div>
+
+            </div>
+
+
+            <div class="qualia-grid">
+
+
+                <!-- INSTAGRAM QUALIA -->
+
+                <a
+                    href="https://www.instagram.com/qualiaqualiaqualia/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="qualia-box"
+                >
+
+                    <div class="qualia-type">
+                        Instagram
+                    </div>
+
+                    <div class="qualia-name">
+                        @qualiaqualiaqualia
+                    </div>
+
+                    <div class="qualia-arrow">
                         ↗
-
                     </div>
 
                 </a>
 
 
-                <!-- SPOTIFY -->
+                <!-- YOUTUBE QUALIA -->
 
-                <div class="spotify-card">
+                <a
+                    href="https://www.youtube.com/@QUALIA-n3m"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="qualia-box"
+                >
 
-                    <iframe
-                        src="https://open.spotify.com/embed/playlist/55tUZnCILFdGp8u8O1z31E?utm_source=generator"
-                        title="Playlist Spotify"
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy">
-                    </iframe>
+                    <div class="qualia-type">
+                        YouTube
+                    </div>
 
-                </div>
+                    <div class="qualia-name">
+                        @QUALIA-n3m
+                    </div>
 
+                    <div class="qualia-arrow">
+                        ↗
+                    </div>
 
-                <!-- SOUNDCLOUD -->
-
-                <div class="soundcloud-card">
-
-                    <iframe
-                        scrolling="no"
-                        frameborder="no"
-                        allow="autoplay"
-                        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lsoet/sets/mixe-par-kalifa&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
-                        title="Mixe par Kalifa">
-                    </iframe>
-
-                </div>
+                </a>
 
 
             </div>
 
-
-            <button
-                class="scroll-button scroll-right"
-                id="scroll-right-credits"
-            >
-
-                →
-
-            </button>
+        </section>
 
 
-        </div>
-
-    </section>
+    </main>
 
 
     <!-- =====================================================
-         INSTAGRAM MAPLUSTP
+         FOOTER
     ===================================================== -->
 
-    <div class="instagram-container">
+    <footer>
+
+        <span>
+            JNWLKALIFA
+        </span>
 
         <a
-            class="instagram-link"
-            href="https://www.instagram.com/maplustp/"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
         >
-
-            @maplustp
-
+            333kalifa@gmail.com
         </a>
 
-    </div>
+        <span>
+            2026
+        </span>
 
-
-    <!-- =====================================================
-         UNTITLED
-    ===================================================== -->
-
-    <div class="untitled-container">
-
-
-        <a
-            class="untitled-link"
-            href="https://untitled.stream/library/project/gate44hTl4t2uCsDs3h7Q"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-
-            UNTITLED PROD
-
-        </a>
-
-
-        <a
-            class="untitled-link"
-            href="https://untitled.stream/library/project/5nNT2RCAy8tt4vDXOg2ji"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-
-            UNTITLED MIX
-
-        </a>
-
-
-    </div>
-
-
-    <!-- =====================================================
-         COURT METRAGES
-    ===================================================== -->
-
-    <div class="short-films-container">
-
-        <a
-            class="short-films-link"
-            href="https://linktr.ee/lucasfaucheuxppsaudiovisuelle"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-
-            COURT METRAGES
-
-        </a>
-
-    </div>
-
-
-    <!-- =====================================================
-         QUALIA
-    ===================================================== -->
-
-    <section class="qualia-section">
-
-
-        <div class="qualia-title">
-
-            QUALIA
-
-        </div>
-
-
-        <div class="qualia-grid">
-
-
-            <!-- INSTAGRAM QUALIA -->
-
-            <a
-                class="qualia-box qualia-instagram"
-                href="https://www.instagram.com/qualiaqualiaqualia/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <div class="qualia-instagram-title">
-
-                    INSTAGRAM
-
-                </div>
-
-                <div class="qualia-instagram-name">
-
-                    @qualiaqualiaqualia
-
-                </div>
-
-                <div class="qualia-instagram-arrow">
-
-                    ↗
-
-                </div>
-
-            </a>
-
-
-            <!-- YOUTUBE QUALIA -->
-
-            <a
-                class="qualia-box qualia-youtube"
-                href="https://www.youtube.com/@QUALIA-n3m"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <div class="qualia-youtube-title">
-
-                    YOUTUBE
-
-                </div>
-
-                <div class="qualia-youtube-name">
-
-                    @QUALIA-n3m
-
-                </div>
-
-                <div class="qualia-youtube-arrow">
-
-                    ↗
-
-                </div>
-
-            </a>
-
-
-        </div>
-
-    </section>
+    </footer>
 
 
     <!-- =====================================================
@@ -1580,7 +1952,7 @@
     ===================================================== -->
 
     <audio
-        id="logo-sound"
+        id="logoSound"
         preload="auto"
     >
 
@@ -1604,118 +1976,187 @@
         ===================================================== */
 
         const logo =
-            document.getElementById("logo");
+            document.getElementById("mainLogo");
 
-        const sound =
-            document.getElementById("logo-sound");
+        const logoSound =
+            document.getElementById("logoSound");
 
 
         logo.addEventListener(
             "mouseenter",
-            function() {
+            () => {
 
-                sound.currentTime = 0;
+                logoSound.currentTime = 0;
 
-                sound.play();
+                logoSound.play().catch(() => {});
 
             }
         );
 
 
         /* =====================================================
-           SCROLL CLIPS
+           HALO SOURIS
         ===================================================== */
 
-        const clipsContainer =
-            document.getElementById("clips-container");
+        const cursorGlow =
+            document.getElementById("cursorGlow");
 
 
-        document
-            .getElementById("scroll-left-clips")
-            .addEventListener(
-                "click",
-                function() {
+        document.addEventListener(
+            "mousemove",
+            (event) => {
 
-                    clipsContainer.scrollBy({
+                cursorGlow.style.left =
+                    event.clientX + "px";
 
-                        left:
-                            -window.innerWidth * 0.65,
+                cursorGlow.style.top =
+                    event.clientY + "px";
 
-                        behavior:
-                            "smooth"
-
-                    });
-
-                }
-            );
-
-
-        document
-            .getElementById("scroll-right-clips")
-            .addEventListener(
-                "click",
-                function() {
-
-                    clipsContainer.scrollBy({
-
-                        left:
-                            window.innerWidth * 0.65,
-
-                        behavior:
-                            "smooth"
-
-                    });
-
-                }
-            );
+            }
+        );
 
 
         /* =====================================================
-           SCROLL CRÉDITS
+           SCROLL HORIZONTAL
         ===================================================== */
 
-        const creditsContainer =
-            document.getElementById("credits-container");
+        function scrollRightCustom(id) {
+
+            const container =
+                document.getElementById(id);
+
+            const amount =
+                Math.min(
+                    container.clientWidth * 0.72,
+                    720
+                );
 
 
-        document
-            .getElementById("scroll-left-credits")
-            .addEventListener(
-                "click",
-                function() {
+            if (
+                container.scrollLeft +
+                container.clientWidth
+                >=
+                container.scrollWidth - 10
+            ) {
 
-                    creditsContainer.scrollBy({
+                container.scrollTo({
 
-                        left:
-                            -window.innerWidth * 0.65,
+                    left: 0,
 
-                        behavior:
-                            "smooth"
+                    behavior: "smooth"
 
-                    });
+                });
 
-                }
+            } else {
+
+                container.scrollBy({
+
+                    left: amount,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+
+        }
+
+
+        function scrollLeftCustom(id) {
+
+            const container =
+                document.getElementById(id);
+
+            const amount =
+                Math.min(
+                    container.clientWidth * 0.72,
+                    720
+                );
+
+
+            if (
+                container.scrollLeft <= 10
+            ) {
+
+                container.scrollTo({
+
+                    left:
+                        container.scrollWidth,
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            } else {
+
+                container.scrollBy({
+
+                    left:
+                        -amount,
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            }
+
+        }
+
+
+        /* =====================================================
+           APPARITION CINÉMATIQUE DES SECTIONS
+        ===================================================== */
+
+        const sections =
+            document.querySelectorAll(
+                ".section"
             );
 
 
-        document
-            .getElementById("scroll-right-credits")
-            .addEventListener(
-                "click",
-                function() {
+        const revealObserver =
+            new IntersectionObserver(
 
-                    creditsContainer.scrollBy({
+                (entries) => {
 
-                        left:
-                            window.innerWidth * 0.65,
+                    entries.forEach(
+                        (entry) => {
 
-                        behavior:
-                            "smooth"
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                    });
+                                entry.target.classList.add(
+                                    "visible"
+                                );
 
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: 0.12,
+
+                    rootMargin:
+                        "0px 0px -8% 0px"
                 }
+
             );
+
+
+        sections.forEach(
+            (section) => {
+
+                revealObserver.observe(
+                    section
+                );
+
+            }
+        );
 
 
     </script>
