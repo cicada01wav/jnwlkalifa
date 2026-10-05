@@ -3,2456 +3,2223 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+  <title>JNWLKALIFA</title>
 
-<title>JNWLKALIFA</title>
+  <link rel="icon" type="image/png" href="assets/logo kalifa.png">
+  <link rel="apple-touch-icon" href="assets/logo kalifa.png">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Rajdhani:wght@400;500&display=swap" rel="stylesheet">
 
-/* =========================================================
-   BASE
-========================================================= */
+  <style>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-html {
-    scroll-behavior: smooth;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body {
-    background: #000;
-    color: #fff;
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+      cursor: default;
+    }
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    /* =========================================================
+       HALO SOURIS
+    ========================================================= */
 
-    min-height: 100vh;
+    #cursorGlow {
 
-    overflow-x: hidden;
+      position: fixed;
 
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-}
+      width: 500px;
+      height: 500px;
 
+      border-radius: 50%;
 
-/* =========================================================
-   TOUS LES LIENS EN BLANC
-========================================================= */
+      pointer-events: none;
 
-a,
-a:link,
-a:visited,
-a:hover,
-a:active {
+      z-index: 0;
 
-    color: #fff !important;
-
-    -webkit-text-fill-color: #fff;
-
-    text-decoration: none;
-}
-
-
-/* =========================================================
-   HALO SOURIS
-========================================================= */
-
-.cursor-glow {
-
-    position: fixed;
-
-    width: 380px;
-    height: 380px;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    z-index: 0;
-
-    background:
+      background:
         radial-gradient(
-            circle,
-            rgba(255,255,255,0.035) 0%,
-            rgba(255,255,255,0.012) 28%,
-            rgba(255,255,255,0) 70%
+          circle,
+          rgba(255,255,255,0.055) 0%,
+          rgba(255,255,255,0.02) 20%,
+          rgba(255,255,255,0) 70%
         );
 
-    transform:
-        translate(-50%, -50%);
+      transform: translate(-50%, -50%);
 
-    transition:
-        left 0.12s ease-out,
-        top 0.12s ease-out;
+      transition:
+        transform 0.08s linear;
 
-    opacity: 0.7;
-}
+      mix-blend-mode: screen;
+    }
 
+    /* =========================================================
+       GRAIN
+    ========================================================= */
 
-/* =========================================================
-   GRAIN
-========================================================= */
+    body::before {
 
-body::before {
+      content: "";
 
-    content: "";
+      position: fixed;
+      inset: 0;
 
-    position: fixed;
+      width: 100%;
+      height: 100%;
 
-    inset: 0;
+      pointer-events: none;
 
-    pointer-events: none;
+      z-index: 1;
 
-    z-index: 50;
+      opacity: 0.055;
 
-    opacity: 0.025;
-
-    background-image:
+      background-image:
         url("https://www.transparenttextures.com/patterns/asfalt-light.png");
 
-    animation:
-        grainMove 0.25s infinite;
-}
-
-@keyframes grainMove {
-
-    0% {
-        transform: translate(0,0);
+      animation: noiseMove 0.25s infinite;
     }
 
-    25% {
-        transform: translate(-1%,1%);
+    @keyframes noiseMove {
+
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(-1%, 1%);
+      }
+
+      50% {
+        transform: translate(1%, -1%);
+      }
+
+      75% {
+        transform: translate(-1%, -1%);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+
     }
 
-    50% {
-        transform: translate(1%,-1%);
+    /* =========================================================
+       LIGNES CRT
+    ========================================================= */
+
+    body::after {
+
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      pointer-events: none;
+
+      z-index: 2;
+
+      opacity: 0.06;
+
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.025) 0px,
+          rgba(255,255,255,0.025) 1px,
+          transparent 2px,
+          transparent 4px
+        );
+
+      mix-blend-mode: soft-light;
     }
 
-    75% {
-        transform: translate(-1%,-1%);
+    /* =========================================================
+       VIGNETTE
+    ========================================================= */
+
+    .vignette {
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 4;
+
+      box-shadow:
+        inset 0 0 180px rgba(0,0,0,0.85),
+        inset 0 0 70px rgba(0,0,0,0.45);
     }
 
-    100% {
-        transform: translate(0,0);
+    /* =========================================================
+       LIENS
+    ========================================================= */
+
+    a,
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+
+      color: #fff !important;
+
+      -webkit-text-fill-color: #fff;
+
+      text-decoration: none;
     }
 
-}
+    /* =========================================================
+       INTRO
+    ========================================================= */
 
+    #intro {
 
-/* =========================================================
-   INTRO
-========================================================= */
+      position: fixed;
 
-.intro {
+      inset: 0;
 
-    position: fixed;
+      z-index: 999999;
 
-    inset: 0;
+      background: #000;
 
-    width: 100%;
-    height: 100vh;
+      display: flex;
 
-    background: #000;
+      justify-content: center;
 
-    display: flex;
+      align-items: center;
 
-    align-items: center;
-    justify-content: center;
+      animation: introFade 1.35s ease forwards;
+    }
 
-    z-index: 1000;
+    .intro-logo {
 
-    animation:
-        introDisappear
-        1.5s
-        cubic-bezier(0.77,0,0.175,1)
-        forwards;
+      width: 280px;
 
-    animation-delay: 1.35s;
-}
+      max-width: 60vw;
 
-.intro-logo {
+      opacity: 0;
 
-    width: 520px;
+      transform: scale(0.92);
 
-    max-width: 78vw;
+      animation:
+        introLogoIn 0.8s ease forwards;
+    }
 
-    opacity: 0;
+    @keyframes introLogoIn {
 
-    transform:
-        scale(0.88);
+      0% {
 
-    animation:
-        introLogo
-        1.1s
-        cubic-bezier(0.22,1,0.36,1)
-        forwards;
-}
-
-@keyframes introLogo {
-
-    0% {
         opacity: 0;
-        transform: scale(0.88);
-        filter: blur(8px);
-    }
 
-    100% {
+        transform:
+          scale(0.92);
+      }
+
+      100% {
+
         opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
+
+        transform:
+          scale(1);
+      }
     }
 
-}
+    @keyframes introFade {
 
-@keyframes introDisappear {
-
-    0% {
+      0% {
         opacity: 1;
         visibility: visible;
-    }
+      }
 
-    70% {
+      72% {
         opacity: 1;
-    }
+      }
 
-    100% {
+      100% {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
+      }
     }
 
-}
+    /* =========================================================
+       SITE
+    ========================================================= */
 
+    #siteWrapper {
 
-/* =========================================================
-   HEADER
-========================================================= */
+      position: relative;
 
-.top-header {
+      z-index: 5;
 
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    padding:
-        18px
-        20px;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: flex-start;
-
-    z-index: 100;
-
-    pointer-events: none;
-
-    mix-blend-mode: difference;
-}
-
-.brand {
-
-    font-size: 11px;
-
-    letter-spacing:
-        0.14em;
-
-    font-weight: 400;
-
-    text-transform: uppercase;
-}
-
-.counter {
-
-    font-size: 10px;
-
-    letter-spacing:
-        0.12em;
-
-    opacity: 0.55;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-main {
-    position: relative;
-    z-index: 2;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-
-    min-height: 100vh;
-
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    padding:
-        60px
-        20px
-        100px;
-
-    position: relative;
-}
-
-.hero-inner {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    opacity: 0;
-
-    transform:
-        translateY(20px);
-
-    animation:
-        heroAppear
-        1.8s
-        cubic-bezier(0.22,1,0.36,1)
-        forwards;
-
-    animation-delay: 1.55s;
-}
-
-@keyframes heroAppear {
-
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
+      transition:
+        filter 0.45s ease,
+        transform 0.45s ease;
     }
 
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+    #siteWrapper.blur-active {
+
+      filter:
+        blur(6px)
+        brightness(0.52);
     }
 
-}
+    /* =========================================================
+       HEADER
+    ========================================================= */
 
-.main-logo {
+    header {
 
-    width: 430px;
+      position: fixed;
 
-    max-width: 78vw;
+      top: 0;
+      left: 0;
+      right: 0;
 
-    height: auto;
+      z-index: 1000;
 
-    cursor: pointer;
+      display: flex;
 
-    display: block;
+      justify-content: space-between;
 
-    transition:
-        transform 0.8s
-        cubic-bezier(0.22,1,0.36,1),
+      align-items: center;
 
-        opacity 0.5s ease,
+      padding: 24px 32px;
 
-        filter 0.8s ease;
-}
+      font-family: 'Rajdhani', sans-serif;
 
-.main-logo:hover {
+      font-size: 0.76rem;
 
-    transform:
-        scale(1.025);
+      letter-spacing: 3px;
 
-    filter:
-        brightness(1.08);
-}
+      text-transform: uppercase;
 
+      pointer-events: none;
 
-/* =========================================================
-   EMAIL
-========================================================= */
-
-.email {
-
-    margin-top: 30px;
-
-    font-size: 18px;
-
-    letter-spacing:
-        0.02em;
-
-    font-weight: 300;
-
-    position: relative;
-
-    opacity: 0.78;
-
-    transition:
-        opacity 0.4s ease;
-}
-
-.email::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -5px;
-
-    width: 100%;
-    height: 1px;
-
-    background: #fff;
-
-    transform:
-        scaleX(0);
-
-    transform-origin:
-        right;
-
-    transition:
-        transform 0.5s
-        cubic-bezier(0.22,1,0.36,1);
-}
-
-.email:hover {
-    opacity: 1;
-}
-
-.email:hover::after {
-
-    transform:
-        scaleX(1);
-
-    transform-origin:
-        left;
-}
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section {
-
-    width: 100%;
-
-    padding:
-        120px
-        20px;
-
-    opacity: 0;
-
-    transform:
-        translateY(45px);
-
-    filter:
-        blur(7px);
-
-    transition:
-        opacity 1.2s
-        cubic-bezier(0.22,1,0.36,1),
-
-        transform 1.2s
-        cubic-bezier(0.22,1,0.36,1),
-
-        filter 1.2s
-        cubic-bezier(0.22,1,0.36,1);
-}
-
-.section.visible {
-
-    opacity: 1;
-
-    transform:
-        translateY(0);
-
-    filter:
-        blur(0);
-}
-
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-.section-header {
-
-    width: 100%;
-
-    max-width: 1500px;
-
-    margin:
-        0 auto 28px;
-
-    display: flex;
-
-    align-items: baseline;
-
-    justify-content: space-between;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.14);
-
-    padding-bottom: 11px;
-}
-
-.section-title {
-
-    font-size: 10px;
-
-    letter-spacing:
-        0.18em;
-
-    text-transform:
-        uppercase;
-
-    font-weight: 400;
-}
-
-.section-number {
-
-    font-size: 9px;
-
-    letter-spacing:
-        0.12em;
-
-    opacity: 0.35;
-}
-
-
-/* =========================================================
-   SCROLL HORIZONTAL
-========================================================= */
-
-.scroll-wrapper {
-
-    width: 100%;
-
-    max-width: 1500px;
-
-    margin: 0 auto;
-
-    position: relative;
-}
-
-.horizontal-scroll {
-
-    width: 100%;
-
-    display: flex;
-
-    gap: 18px;
-
-    overflow-x: auto;
-
-    overflow-y: hidden;
-
-    scroll-behavior: smooth;
-
-    scrollbar-width: none;
-
-    padding:
-        4px 0
-        16px;
-}
-
-.horizontal-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-
-/* =========================================================
-   FLÈCHES
-========================================================= */
-
-.arrow {
-
-    position: absolute;
-
-    top: 50%;
-
-    transform:
-        translateY(-50%);
-
-    z-index: 10;
-
-    width: 42px;
-    height: 42px;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.25);
-
-    border-radius: 50%;
-
-    background:
-        rgba(0,0,0,0.55);
-
-    color: #fff !important;
-
-    -webkit-text-fill-color: #fff;
-
-    font-size: 20px;
-
-    font-weight: 200;
-
-    cursor: pointer;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    opacity: 0;
-
-    transition:
-        opacity 0.35s ease,
-
-        background 0.35s ease,
-
-        transform 0.35s ease;
-}
-
-.scroll-wrapper:hover .arrow {
-    opacity: 1;
-}
-
-.arrow:hover {
-
-    background:
-        rgba(255,255,255,0.1);
-
-    transform:
-        translateY(-50%)
-        scale(1.08);
-}
-
-.arrow.left {
-    left: 14px;
-}
-
-.arrow.right {
-    right: 14px;
-}
-
-
-/* =========================================================
-   CLIPS YOUTUBE
-========================================================= */
-
-.clip-card {
-
-    flex:
-        0 0 min(68vw, 900px);
-
-    aspect-ratio:
-        16 / 9;
-
-    background:
-        #080808;
-
-    overflow: hidden;
-
-    position: relative;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-    transition:
-        transform 0.7s
-        cubic-bezier(0.22,1,0.36,1),
-
-        border-color 0.4s ease;
-}
-
-.clip-card:hover {
-
-    transform:
-        translateY(-4px);
-
-    border-color:
-        rgba(255,255,255,0.22);
-}
-
-.clip-card iframe {
-
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    border: none;
-}
-
-
-/* =========================================================
-   CRÉDITS
-========================================================= */
-
-.credit-card {
-
-    flex:
-        0 0 430px;
-
-    height: 300px;
-
-    background:
-        #080808;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.09);
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.7s
-        cubic-bezier(0.22,1,0.36,1),
-
-        background 0.5s ease,
-
-        border-color 0.5s ease;
-}
-
-.credit-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    background:
-        #0d0d0d;
-
-    border-color:
-        rgba(255,255,255,0.2);
-}
-
-.credit-main {
-
-    font-size: 24px;
-
-    letter-spacing:
-        0.03em;
-
-    font-weight: 300;
-}
-
-.credit-sub {
-
-    margin-top: 14px;
-
-    font-size: 10px;
-
-    letter-spacing:
-        0.13em;
-
-    text-transform:
-        uppercase;
-
-    opacity: 0.4;
-}
-
-.credit-arrow {
-
-    position: absolute;
-
-    right: 18px;
-    bottom: 17px;
-
-    font-size: 15px;
-
-    opacity: 0.35;
-
-    transition:
-        opacity 0.4s ease,
-
-        transform 0.4s ease;
-}
-
-.credit-card:hover .credit-arrow {
-
-    opacity: 1;
-
-    transform:
-        translate(3px,-3px);
-}
-
-
-/* =========================================================
-   SPOTIFY
-========================================================= */
-
-.spotify-card {
-
-    flex:
-        0 0 430px;
-
-    height: 300px;
-
-    overflow: hidden;
-
-    background:
-        #000;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.09);
-}
-
-.spotify-card iframe {
-
-    width: 100%;
-    height: 100%;
-
-    border: none;
-}
-
-
-/* =========================================================
-   SOUNDCLOUD
-========================================================= */
-
-.soundcloud-card {
-
-    flex:
-        0 0 430px;
-
-    height: 300px;
-
-    overflow: hidden;
-
-    background:
-        #000;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.09);
-}
-
-.soundcloud-card iframe {
-
-    width: 100%;
-    height: 100%;
-
-    border: none;
-}
-
-
-/* =========================================================
-   INSTAGRAM MAPLUSTP
-========================================================= */
-
-.social-section {
-
-    width: 100%;
-
-    padding:
-        80px
-        20px
-        50px;
-
-    display: flex;
-
-    justify-content: center;
-}
-
-.social-link {
-
-    font-size:
-        clamp(30px, 5vw, 58px);
-
-    letter-spacing:
-        -0.035em;
-
-    font-weight: 300;
-
-    position: relative;
-
-    transition:
-        opacity 0.4s ease,
-
-        transform 0.5s
-        cubic-bezier(0.22,1,0.36,1);
-}
-
-.social-link::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    bottom: -9px;
-
-    height: 1px;
-
-    background:
-        rgba(255,255,255,0.7);
-
-    transform:
-        scaleX(0);
-
-    transform-origin:
-        right;
-
-    transition:
-        transform 0.6s
-        cubic-bezier(0.22,1,0.36,1);
-}
-
-.social-link:hover {
-
-    opacity: 0.65;
-
-    transform:
-        translateY(-3px);
-}
-
-.social-link:hover::after {
-
-    transform:
-        scaleX(1);
-
-    transform-origin:
-        left;
-}
-
-
-/* =========================================================
-   UNTITLED
-========================================================= */
-
-.untitled-section {
-
-    width: 100%;
-
-    padding:
-        20px
-        20px
-        55px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 80px;
-}
-
-.untitled-link {
-
-    font-size: 14px;
-
-    letter-spacing:
-        0.12em;
-
-    text-transform:
-        uppercase;
-
-    opacity: 0.75;
-
-    position: relative;
-
-    transition:
-        opacity 0.4s ease;
-}
-
-.untitled-link::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -5px;
-
-    width: 100%;
-    height: 1px;
-
-    background: #fff;
-
-    transform:
-        scaleX(0);
-
-    transform-origin:
-        right;
-
-    transition:
-        transform 0.45s
-        cubic-bezier(0.22,1,0.36,1);
-}
-
-.untitled-link:hover {
-    opacity: 1;
-}
-
-.untitled-link:hover::after {
-
-    transform:
-        scaleX(1);
-
-    transform-origin:
-        left;
-}
-
-
-/* =========================================================
-   COURT METRAGES
-========================================================= */
-
-.short-film-section {
-
-    width: 100%;
-
-    padding:
-        25px
-        20px
-        100px;
-
-    display: flex;
-
-    justify-content: center;
-}
-
-.short-film-link {
-
-    font-size: 14px;
-
-    letter-spacing:
-        0.13em;
-
-    text-transform:
-        uppercase;
-
-    opacity: 0.7;
-
-    transition:
-        opacity 0.4s ease,
-
-        transform 0.4s ease;
-}
-
-.short-film-link:hover {
-
-    opacity: 1;
-
-    transform:
-        translateY(-2px);
-}
-
-
-/* =========================================================
-   QUALIA
-========================================================= */
-
-.qualia-section {
-
-    width: 100%;
-
-    padding:
-        90px
-        20px
-        180px;
-}
-
-.qualia-grid {
-
-    width: 100%;
-
-    max-width: 1500px;
-
-    margin: 0 auto;
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 18px;
-}
-
-
-/* =========================================================
-   CARTE QUALIA COMMUNE
-========================================================= */
-
-.qualia-card {
-
-    width: 100%;
-
-    height: 500px;
-
-    min-height: 500px;
-
-    background:
-        #080808;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.09);
-
-    overflow: hidden;
-
-    position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-    transition:
-        transform 0.7s
-        cubic-bezier(0.22,1,0.36,1),
-
-        background 0.5s ease,
-
-        border-color 0.5s ease;
-
-    cursor: pointer;
-}
-
-.qualia-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    background:
-        #0d0d0d;
-
-    border-color:
-        rgba(255,255,255,0.22);
-}
-
-
-/* =========================================================
-   HAUT DES CARTES QUALIA
-========================================================= */
-
-.qualia-top {
-
-    width: 100%;
-
-    height: 64px;
-
-    flex:
-        0 0 64px;
-
-    padding:
-        0 28px;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.07);
-}
-
-.qualia-type {
-
-    font-size: 9px;
-
-    letter-spacing:
-        0.2em;
-
-    text-transform:
-        uppercase;
-
-    opacity: 0.35;
-}
-
-.qualia-top-link {
-
-    font-size: 11px;
-
-    letter-spacing:
-        0.04em;
-
-    opacity: 0.7;
-
-    transition:
-        opacity 0.4s ease;
-}
-
-.qualia-card:hover .qualia-top-link {
-    opacity: 1;
-}
-
-
-/* =========================================================
-   MILIEU
-========================================================= */
-
-.qualia-middle {
-
-    flex:
-        1 1 auto;
-
-    width: 100%;
-
-    display: flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   PHOTO INSTAGRAM QUALIA
-========================================================= */
-
-.qualia-profile-image {
-
-    width: 150px;
-
-    height: 150px;
-
-    object-fit: cover;
-
-    display: block;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.3);
-
-    box-shadow:
-        0 0 0 9px
-        rgba(255,255,255,0.025);
-
-    transition:
-        transform 0.7s
-        cubic-bezier(0.22,1,0.36,1),
-
-        box-shadow 0.6s ease,
-
-        filter 0.6s ease;
-}
-
-.qualia-card:hover .qualia-profile-image {
-
-    transform:
-        scale(1.045);
-
-    box-shadow:
-        0 0 0 11px
-        rgba(255,255,255,0.045);
-
-    filter:
-        brightness(1.05);
-}
-
-
-/* =========================================================
-   PHOTO YOUTUBE QUALIA
-========================================================= */
-
-.qualia-youtube-profile {
-
-    width: 150px;
-
-    height: 150px;
-
-    object-fit: cover;
-
-    display: block;
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.3);
-
-    box-shadow:
-        0 0 0 9px
-        rgba(255,255,255,0.025);
-
-    transition:
-        transform 0.7s
-        cubic-bezier(0.22,1,0.36,1),
-
-        box-shadow 0.6s ease,
-
-        filter 0.6s ease;
-}
-
-.qualia-card:hover .qualia-youtube-profile {
-
-    transform:
-        scale(1.045);
-
-    box-shadow:
-        0 0 0 11px
-        rgba(255,255,255,0.045);
-
-    filter:
-        brightness(1.05);
-}
-
-
-/* =========================================================
-   BAS DES CARTES QUALIA
-========================================================= */
-
-.qualia-bottom {
-
-    width: 100%;
-
-    height: 92px;
-
-    flex:
-        0 0 92px;
-
-    padding:
-        0 28px;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,0.07);
-}
-
-.qualia-name {
-
-    font-size:
-        clamp(17px, 2vw, 25px);
-
-    font-weight: 300;
-
-    letter-spacing:
-        -0.02em;
-
-    white-space:
-        nowrap;
-}
-
-.qualia-bottom-link {
-
-    font-size: 9px;
-
-    letter-spacing:
-        0.15em;
-
-    text-transform:
-        uppercase;
-
-    opacity: 0.5;
-
-    transition:
-        opacity 0.4s ease,
-
-        transform 0.4s ease;
-}
-
-.qualia-card:hover .qualia-bottom-link {
-
-    opacity: 1;
-
-    transform:
-        translateX(3px);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    width: 100%;
-
-    padding:
-        30px
-        20px
-        35px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,0.08);
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-
-    font-size: 9px;
-
-    letter-spacing:
-        0.12em;
-
-    text-transform:
-        uppercase;
-
-    opacity: 0.4;
-}
-
-footer a {
-    opacity: 1;
-}
-
-footer a:hover {
-    opacity: 0.6;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 800px) {
-
-    .top-header {
-        padding: 15px;
+      opacity: 0.82;
     }
 
-    .counter {
-        display: none;
+    .header-left,
+    .header-right {
+
+      pointer-events: auto;
     }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
 
     .hero {
 
-        padding:
-            50px
-            15px
-            80px;
+      height: 100vh;
+
+      min-height: 700px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      text-align: center;
+
+      padding-top: 60px;
     }
 
-    .main-logo {
-        width: 320px;
+    .logo {
+
+      width: 320px;
+
+      max-width: 65vw;
+
+      display: block;
+
+      cursor: pointer;
+
+      transform:
+        scale(1);
+
+      transition:
+        transform 0.6s cubic-bezier(.16,1,.3,1),
+        filter 0.6s ease;
+    }
+
+    .logo:hover {
+
+      transform:
+        scale(1.06);
+
+      filter:
+        brightness(1.08)
+        drop-shadow(0 0 30px rgba(255,255,255,0.08));
     }
 
     .email {
 
-        font-size: 15px;
+      margin-top: 34px;
 
-        margin-top: 24px;
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 0.9rem;
+
+      letter-spacing: 3px;
+
+      opacity: 0.62;
+
+      transition:
+        opacity 0.3s ease;
     }
 
-    .section {
-
-        padding:
-            80px
-            15px;
+    .email:hover {
+      opacity: 1;
     }
 
-    .clip-card {
+    /* =========================================================
+       SECTIONS
+    ========================================================= */
 
-        flex:
-            0 0 88vw;
+    section {
+
+      position: relative;
+
+      width: 100%;
+
+      padding: 70px 0 90px;
+
+      opacity: 0;
+
+      transform:
+        translateY(35px);
+
+      transition:
+        opacity 1s ease,
+        transform 1s ease;
     }
 
-    .credit-card,
-    .spotify-card,
-    .soundcloud-card {
+    section.visible {
 
-        flex:
-            0 0 88vw;
+      opacity: 1;
 
-        height: 270px;
+      transform:
+        translateY(0);
     }
+
+    .section-title {
+
+      padding-left: 50px;
+
+      margin-bottom: 22px;
+
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 1.4rem;
+
+      font-weight: 400;
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+
+      opacity: 0.82;
+    }
+
+    /* =========================================================
+       HORIZONTAL SCROLL
+    ========================================================= */
+
+    .scroll-wrapper {
+
+      position: relative;
+
+      width: 100%;
+    }
+
+    .horizontal-scroll {
+
+      display: flex;
+
+      gap: 22px;
+
+      overflow-x: auto;
+
+      overflow-y: hidden;
+
+      padding: 15px 50px 25px;
+
+      scrollbar-width: none;
+
+      -ms-overflow-style: none;
+
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* =========================================================
+       ARROWS
+    ========================================================= */
 
     .arrow {
 
-        opacity: 0.8;
+      position: absolute;
 
-        width: 38px;
-        height: 38px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      width: 52px;
+      height: 52px;
+
+      border-radius: 50%;
+
+      border: none;
+
+      background:
+        rgba(255,255,255,0.07);
+
+      color: #fff;
+
+      font-size: 2rem;
+
+      cursor: pointer;
+
+      z-index: 20;
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        opacity 0.3s ease;
+
+      backdrop-filter: blur(8px);
+
+      opacity: 0.42;
+    }
+
+    .scroll-wrapper:hover .arrow {
+      opacity: 0.78;
+    }
+
+    .arrow:hover {
+
+      background:
+        rgba(255,255,255,0.16);
+
+      transform:
+        translateY(-50%)
+        scale(1.08);
+
+      opacity: 1;
     }
 
     .arrow.left {
-        left: 8px;
+      left: 8px;
     }
 
     .arrow.right {
-        right: 8px;
+      right: 8px;
     }
 
-    .social-section {
+    /* =========================================================
+       VIDEO CARDS
+    ========================================================= */
 
-        padding:
-            60px
-            15px
-            35px;
+    .video-card {
+
+      min-width: 620px;
+
+      width: 620px;
+
+      height: 350px;
+
+      flex-shrink: 0;
+
+      background: #080808;
+
+      border: 1px solid rgba(255,255,255,0.12);
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
     }
 
-    .untitled-section {
+    .video-card:hover {
 
-        gap: 35px;
+      transform:
+        scale(1.015);
 
-        flex-wrap: wrap;
+      filter:
+        brightness(1.05);
+
+      box-shadow:
+        0 0 40px rgba(255,255,255,0.05);
     }
 
-    .short-film-section {
+    .video-card iframe {
 
-        padding-bottom:
-            80px;
+      width: 100%;
+
+      height: 100%;
+
+      border: none;
+
+      display: block;
     }
 
-    .qualia-section {
+    /* =========================================================
+       CREDITS CARD
+    ========================================================= */
 
-        padding:
-            70px
-            15px
-            120px;
+    .credit-card {
+
+      min-width: 500px;
+
+      width: 500px;
+
+      height: 360px;
+
+      flex-shrink: 0;
+
+      background: #0a0a0a;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      position: relative;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
     }
 
-    .qualia-grid {
+    .credit-card:hover {
 
-        grid-template-columns:
-            1fr;
+      transform:
+        scale(1.015);
+
+      filter:
+        brightness(1.04);
+
+      box-shadow:
+        0 0 40px rgba(255,255,255,0.05);
     }
+
+    /* =========================================================
+       MUSO
+    ========================================================= */
+
+    .muso-card {
+
+      min-width: 500px;
+
+      width: 500px;
+
+      min-height: 360px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background: #0a0a0a;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      padding: 22px;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+    }
+
+    .muso-card:hover {
+
+      transform:
+        scale(1.015);
+
+      filter:
+        brightness(1.04);
+
+      box-shadow:
+        0 0 40px rgba(255,255,255,0.05);
+    }
+
+    .muso-card script {
+      display: block;
+    }
+
+    /* =========================================================
+       SPOTIFY
+    ========================================================= */
+
+    .spotify-card {
+
+      min-width: 520px;
+
+      width: 520px;
+
+      height: 360px;
+
+      flex-shrink: 0;
+
+      overflow: hidden;
+
+      border-radius: 22px;
+
+      background: #0d0d0d;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      box-shadow:
+        0 0 35px rgba(255,255,255,0.04);
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+    }
+
+    .spotify-card:hover {
+
+      transform:
+        scale(1.015);
+
+      filter:
+        brightness(1.04);
+
+      box-shadow:
+        0 0 40px rgba(255,255,255,0.05);
+    }
+
+    .spotify-card iframe {
+
+      width: 100%;
+
+      height: 100%;
+
+      border: none;
+
+      display: block;
+
+      border-radius: 22px;
+    }
+
+    /* =========================================================
+       SOUNDCLOUD
+    ========================================================= */
+
+    .soundcloud-card {
+
+      min-width: 520px;
+
+      width: 520px;
+
+      height: 300px;
+
+      flex-shrink: 0;
+
+      background: #080808;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+    }
+
+    .soundcloud-card:hover {
+
+      transform:
+        scale(1.015);
+
+      filter:
+        brightness(1.04);
+
+      box-shadow:
+        0 0 40px rgba(255,255,255,0.05);
+    }
+
+    .soundcloud-card iframe {
+
+      width: 100%;
+
+      height: 100%;
+
+      display: block;
+
+      border: none;
+    }
+
+    /* =========================================================
+       SIMPLE LINK CARDS
+    ========================================================= */
+
+    .simple-card {
+
+      min-width: 360px;
+
+      width: 360px;
+
+      height: 170px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      text-align: center;
+
+      background: #0a0a0a;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      border-radius: 20px;
+
+      padding: 30px;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+    }
+
+    .simple-card:hover {
+
+      transform:
+        scale(1.025);
+
+      filter:
+        brightness(1.06);
+
+      box-shadow:
+        0 0 35px rgba(255,255,255,0.05);
+    }
+
+    .simple-card-title {
+
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 1.1rem;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 12px;
+
+      opacity: 0.92;
+    }
+
+    .simple-card-sub {
+
+      font-size: 0.8rem;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      opacity: 0.52;
+    }
+
+    /* =========================================================
+       UNTITLED
+    ========================================================= */
+
+    .untitled-card {
+
+      min-width: 380px;
+
+      width: 380px;
+
+      height: 190px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      text-align: center;
+
+      background: #0a0a0a;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      border-radius: 20px;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+    }
+
+    .untitled-card:hover {
+
+      transform:
+        scale(1.025);
+
+      filter:
+        brightness(1.06);
+
+      box-shadow:
+        0 0 35px rgba(255,255,255,0.05);
+    }
+
+    .untitled-title {
+
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 1.15rem;
+
+      letter-spacing: 3px;
+
+      margin-bottom: 10px;
+    }
+
+    .untitled-sub {
+
+      font-size: 0.78rem;
+
+      letter-spacing: 2px;
+
+      opacity: 0.52;
+    }
+
+    /* =========================================================
+       QUALIA CARDS
+    ========================================================= */
 
     .qualia-card {
 
-        height: 430px;
+      min-width: 360px;
 
-        min-height: 430px;
+      width: 360px;
+
+      height: 430px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      background: #0a0a0a;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      transition:
+        transform 0.5s ease,
+        filter 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .qualia-card:hover {
+
+      transform:
+        scale(1.025);
+
+      filter:
+        brightness(1.05);
+
+      box-shadow:
+        0 0 40px rgba(255,255,255,0.06);
     }
 
     .qualia-top {
 
-        height: 60px;
+      display: flex;
 
-        flex-basis:
-            60px;
+      justify-content: space-between;
 
-        padding:
-            0 20px;
+      align-items: center;
+
+      padding: 18px 20px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 0.75rem;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      opacity: 0.72;
+    }
+
+    .qualia-image-wrap {
+
+      flex: 1;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 30px;
+
+      background: #050505;
+    }
+
+    .qualia-image {
+
+      width: 210px;
+
+      height: 210px;
+
+      object-fit: contain;
+
+      border-radius: 50%;
+
+      display: block;
+
+      transition:
+        transform 0.5s ease;
+    }
+
+    .qualia-card:hover .qualia-image {
+
+      transform:
+        scale(1.04);
     }
 
     .qualia-bottom {
 
-        height: 82px;
+      padding: 18px 20px 20px;
 
-        flex-basis:
-            82px;
+      border-top: 1px solid rgba(255,255,255,0.08);
 
-        padding:
-            0 20px;
-    }
+      display: flex;
 
-    .qualia-profile-image,
-    .qualia-youtube-profile {
+      flex-direction: column;
 
-        width: 120px;
-
-        height: 120px;
+      gap: 8px;
     }
 
     .qualia-name {
 
-        font-size: 17px;
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 1rem;
+
+      letter-spacing: 2px;
+
+      opacity: 0.9;
     }
 
-    .qualia-bottom-link {
+    .qualia-action {
 
-        font-size: 8px;
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 0.72rem;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      opacity: 0.48;
+
+      transition:
+        opacity 0.3s ease;
     }
+
+    .qualia-card:hover .qualia-action {
+      opacity: 0.95;
+    }
+
+    /* =========================================================
+       INSTAGRAM SINGLE
+    ========================================================= */
+
+    .instagram-card {
+
+      min-width: 500px;
+
+      width: 500px;
+
+      height: 170px;
+
+      flex-shrink: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      text-align: center;
+
+      background: #0a0a0a;
+
+      border: 1px solid rgba(255,255,255,0.11);
+
+      border-radius: 20px;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+    }
+
+    .instagram-card:hover {
+
+      transform:
+        scale(1.025);
+
+      filter:
+        brightness(1.05);
+
+      box-shadow:
+        0 0 35px rgba(255,255,255,0.05);
+    }
+
+    .instagram-title {
+
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 1rem;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 12px;
+    }
+
+    .instagram-name {
+
+      font-size: 0.85rem;
+
+      letter-spacing: 2px;
+
+      opacity: 0.58;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
 
     footer {
 
-        flex-direction: column;
+      text-align: center;
 
-        gap: 15px;
+      padding:
+        80px 20px 45px;
 
-        text-align:
-            center;
+      font-family: 'Rajdhani', sans-serif;
+
+      letter-spacing: 2px;
+
+      opacity: 0.58;
     }
 
-}
+    .footer-name {
 
+      font-size: 1.25rem;
 
-/* =========================================================
-   RÉDUCTION DES ANIMATIONS
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation-duration:
-            0.01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            0.01ms !important;
-
-        scroll-behavior:
-            auto !important;
+      margin-bottom: 14px;
     }
 
-}
+    .footer-email {
 
-</style>
+      font-size: 0.8rem;
+
+      margin-bottom: 18px;
+    }
+
+    .footer-year {
+
+      font-size: 0.7rem;
+
+      opacity: 0.55;
+    }
+
+    /* =========================================================
+       TIMER
+    ========================================================= */
+
+    #timer {
+
+      position: fixed;
+
+      bottom: 18px;
+      right: 22px;
+
+      z-index: 999999;
+
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 0.72rem;
+
+      letter-spacing: 1px;
+
+      color: rgba(255,255,255,0.42);
+
+      background:
+        rgba(0,0,0,0.35);
+
+      padding:
+        8px 10px;
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      border-radius: 8px;
+
+      backdrop-filter:
+        blur(8px);
+
+      pointer-events: none;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 768px) {
+
+      body {
+        cursor: auto;
+      }
+
+      #cursorGlow {
+        display: none;
+      }
+
+      body::before {
+        opacity: 0.03;
+      }
+
+      body::after {
+        opacity: 0.04;
+      }
+
+      header {
+
+        padding:
+          18px 20px;
+
+        font-size: 0.68rem;
+
+        letter-spacing: 2px;
+      }
+
+      .hero {
+
+        height: 78vh;
+
+        min-height: 560px;
+
+        padding-top: 20px;
+      }
+
+      .intro-logo {
+        width: 210px;
+      }
+
+      .logo {
+
+        width: 210px;
+
+        max-width: 70vw;
+      }
+
+      .email {
+
+        margin-top: 25px;
+
+        font-size: 0.78rem;
+
+        letter-spacing: 2px;
+      }
+
+      section {
+
+        padding:
+          45px 0 65px;
+      }
+
+      .section-title {
+
+        font-size: 1.15rem;
+
+        padding-left: 20px;
+
+        margin-bottom: 10px;
+
+        letter-spacing: 3px;
+      }
+
+      .horizontal-scroll {
+
+        padding:
+          10px 20px 20px;
+
+        gap: 14px;
+      }
+
+      .arrow {
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 1.4rem;
+
+        opacity: 0.55;
+      }
+
+      .arrow.left {
+        left: 4px;
+      }
+
+      .arrow.right {
+        right: 4px;
+      }
+
+      .video-card {
+
+        min-width: 88vw;
+
+        width: 88vw;
+
+        height: 230px;
+
+        border-radius: 16px;
+      }
+
+      .muso-card {
+
+        min-width: 88vw;
+
+        width: 88vw;
+
+        min-height: 300px;
+
+        border-radius: 16px;
+
+        padding: 15px;
+      }
+
+      .spotify-card {
+
+        min-width: 88vw;
+
+        width: 88vw;
+
+        height: 300px;
+
+        border-radius: 16px;
+      }
+
+      .spotify-card iframe {
+        border-radius: 16px;
+      }
+
+      .soundcloud-card {
+
+        min-width: 88vw;
+
+        width: 88vw;
+
+        height: 280px;
+
+        border-radius: 16px;
+      }
+
+      .simple-card {
+
+        min-width: 78vw;
+
+        width: 78vw;
+
+        height: 160px;
+
+        border-radius: 16px;
+      }
+
+      .instagram-card {
+
+        min-width: 88vw;
+
+        width: 88vw;
+
+        height: 150px;
+
+        border-radius: 16px;
+      }
+
+      .untitled-card {
+
+        min-width: 78vw;
+
+        width: 78vw;
+
+        height: 160px;
+
+        border-radius: 16px;
+      }
+
+      .qualia-card {
+
+        min-width: 82vw;
+
+        width: 82vw;
+
+        height: 390px;
+
+        border-radius: 16px;
+      }
+
+      .qualia-image {
+
+        width: 170px;
+        height: 170px;
+      }
+
+      footer {
+
+        padding:
+          55px 20px 90px;
+      }
+
+      #timer {
+
+        bottom: 12px;
+        right: 12px;
+
+        font-size: 0.68rem;
+
+        padding:
+          7px 9px;
+      }
+
+    }
+
+  </style>
 
 </head>
 
-
 <body>
 
+  <div id="cursorGlow"></div>
 
-<!-- =========================================================
-     HALO SOURIS
-========================================================= -->
+  <div class="vignette"></div>
 
-<div
-    class="cursor-glow"
-    id="cursorGlow">
-</div>
+  <!-- =========================================================
+       INTRO
+  ========================================================= -->
 
-
-<!-- =========================================================
-     INTRO
-========================================================= -->
-
-<div class="intro">
+  <div id="intro">
 
     <img
+      src="assets/logo kalifa.png"
+      alt="JNWLKALIFA"
+      class="intro-logo"
+    >
+
+  </div>
+
+  <!-- =========================================================
+       SITE
+  ========================================================= -->
+
+  <div id="siteWrapper">
+
+    <!-- =======================================================
+         HEADER
+    ======================================================== -->
+
+    <header>
+
+      <div class="header-left">
+        JNWLKALIFA
+      </div>
+
+      <div class="header-right">
+        PORTFOLIO
+      </div>
+
+    </header>
+
+    <!-- =======================================================
+         HERO
+    ======================================================== -->
+
+    <section class="hero">
+
+      <img
+        id="mainLogo"
         src="assets/logo kalifa.png"
         alt="JNWLKALIFA"
-        class="intro-logo"
-    >
+        class="logo"
+      >
 
-</div>
+      <a
+        class="email"
+        href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        333kalifa@gmail.com
+      </a>
 
+    </section>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
+    <!-- =======================================================
+         CLIP YOUTUBE
+    ======================================================== -->
 
-<header class="top-header">
+    <section>
 
-    <div class="brand">
-        JNWLKALIFA
-    </div>
+      <div class="section-title">
+        clip youtube
+      </div>
 
-    <div class="counter">
-        PORTFOLIO
-    </div>
+      <div class="scroll-wrapper">
 
-</header>
-
-
-<main>
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="hero">
-
-    <div class="hero-inner">
-
-        <img
-            src="assets/logo kalifa.png"
-            alt="JNWLKALIFA"
-            class="main-logo"
-            id="mainLogo"
+        <button
+          class="arrow left"
+          onclick="scrollHorizontal(this, -1)"
+          aria-label="Précédent"
         >
+          ‹
+        </button>
 
-        <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
+        <div class="horizontal-scroll">
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/MvwBgrpb_zY"
+              title="YouTube video 1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/Z3FNjSBlOBw"
+              title="YouTube video 2"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/Dr4TMMzYIP8"
+              title="YouTube video 3"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/HV0eSCzyPRI"
+              title="YouTube video 4"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/S0FWBMS7t6k"
+              title="YouTube video 5"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/jvVhQVrdKzY"
+              title="YouTube video 6"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/_tJKQ0WCCEw"
+              title="YouTube video 7"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="video-card">
+
+            <iframe
+              src="https://www.youtube.com/embed/wkqTX-3e-2U"
+              title="YouTube video 8"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+        </div>
+
+        <button
+          class="arrow right"
+          onclick="scrollHorizontal(this, 1)"
+          aria-label="Suivant"
+        >
+          ›
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         CREDITS
+    ======================================================== -->
+
+    <section>
+
+      <div class="section-title">
+        crédits
+      </div>
+
+      <div class="scroll-wrapper">
+
+        <button
+          class="arrow left"
+          onclick="scrollHorizontal(this, -1)"
+          aria-label="Précédent"
+        >
+          ‹
+        </button>
+
+        <div class="horizontal-scroll">
+
+          <!-- MUSO.AI -->
+
+          <div class="muso-card">
+
+            <script
+              src="https://platform.muso.ai/embed/widget.js"
+              data-widget="mw_9f3fc5b9b80b0f3863b1"
+              async>
+            </script>
+
+          </div>
+
+          <!-- SPOTIFY -->
+
+          <div class="spotify-card">
+
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius:12px"
+              src="https://open.spotify.com/embed/playlist/55tUZnCILFdGp8u8O1z31E?utm_source=generator&si=e5164ce219be4a39"
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <!-- SOUNDCLOUD -->
+
+          <div class="soundcloud-card">
+
+            <iframe
+              width="100%"
+              height="300"
+              scrolling="no"
+              frameborder="no"
+              allow="autoplay; encrypted-media"
+              src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A1633636807&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+            </iframe>
+
+          </div>
+
+        </div>
+
+        <button
+          class="arrow right"
+          onclick="scrollHorizontal(this, 1)"
+          aria-label="Suivant"
+        >
+          ›
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         INSTAGRAM
+    ======================================================== -->
+
+    <section>
+
+      <div class="section-title">
+        instagram
+      </div>
+
+      <div class="scroll-wrapper">
+
+        <div class="horizontal-scroll">
+
+          <a
+            href="https://www.instagram.com/maplustp/"
             target="_blank"
             rel="noopener noreferrer"
-            class="email"
-        >
-            333kalifa@gmail.com
-        </a>
+            class="instagram-card"
+          >
 
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     01 — CLIP YOUTUBE
-========================================================= -->
-
-<section
-    class="section"
-    id="clips"
->
-
-    <div class="section-header">
-
-        <div class="section-title">
-            CLIP YOUTUBE
-        </div>
-
-        <div class="section-number">
-            01 / 07
-        </div>
-
-    </div>
-
-
-    <div class="scroll-wrapper">
-
-
-        <button
-            class="arrow left"
-            onclick="scrollLeftCustom('clipsScroll')"
-            aria-label="Précédent"
-        >
-            ←
-        </button>
-
-
-        <div
-            class="horizontal-scroll"
-            id="clipsScroll"
-        >
-
-
-            <!-- CLIP 01 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/MvwBgrpb_zY"
-                    title="Clip YouTube 01"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
+            <div class="instagram-title">
+              @maplustp
             </div>
 
-
-            <!-- CLIP 02 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/Z3FNjSBlOBw"
-                    title="Clip YouTube 02"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
+            <div class="instagram-name">
+              INSTAGRAM ↗
             </div>
 
-
-            <!-- CLIP 03 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/Dr4TMMzYIP8"
-                    title="Clip YouTube 03"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-
-            <!-- CLIP 04 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/HV0eSCzyPRI"
-                    title="Clip YouTube 04"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-
-            <!-- CLIP 05 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/S0FWBMS7t6k"
-                    title="Clip YouTube 05"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-
-            <!-- CLIP 06 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/jvVhQVrdKzY"
-                    title="Clip YouTube 06"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-
-            <!-- CLIP 07 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/_tJKQ0WCCEw"
-                    title="Clip YouTube 07"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-
-            <!-- CLIP 08 -->
-
-            <div class="clip-card">
-
-                <iframe
-                    src="https://www.youtube.com/embed/wkqTX-3e-2U"
-                    title="Clip YouTube 08"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
+          </a>
 
         </div>
 
+      </div>
 
-        <button
-            class="arrow right"
-            onclick="scrollRightCustom('clipsScroll')"
-            aria-label="Suivant"
-        >
-            →
-        </button>
+    </section>
 
+    <!-- =======================================================
+         UNTITLED
+    ======================================================== -->
 
-    </div>
+    <section>
 
-</section>
+      <div class="section-title">
+        untitled
+      </div>
 
+      <div class="scroll-wrapper">
 
-<!-- =========================================================
-     02 — CRÉDITS
-========================================================= -->
+        <div class="horizontal-scroll">
 
-<section
-    class="section"
-    id="credits"
->
+          <a
+            href="https://untitled.stream/library/project/gate44hTl4t2uCsDs3h7Q"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="untitled-card"
+          >
 
-    <div class="section-header">
-
-        <div class="section-title">
-            CRÉDITS
-        </div>
-
-        <div class="section-number">
-            02 / 07
-        </div>
-
-    </div>
-
-
-    <div class="scroll-wrapper">
-
-
-        <button
-            class="arrow left"
-            onclick="scrollLeftCustom('creditsScroll')"
-            aria-label="Précédent"
-        >
-            ←
-        </button>
-
-
-        <div
-            class="horizontal-scroll"
-            id="creditsScroll"
-        >
-
-
-            <!-- MUSO.AI -->
-
-            <a
-                href="https://muso.ai/profile/c1360274-4da0-47fd-bc9e-a34f0ab0f511"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="credit-card"
-            >
-
-                <div class="credit-main">
-                    MUSO.AI
-                </div>
-
-                <div class="credit-sub">
-                    Credits & collaborations
-                </div>
-
-                <div class="credit-arrow">
-                    ↗
-                </div>
-
-            </a>
-
-
-            <!-- SPOTIFY -->
-
-            <div class="spotify-card">
-
-                <iframe
-                    src="https://open.spotify.com/embed/playlist/55tUZnCILFdGp8u8O1z31E?utm_source=generator"
-                    title="Spotify playlist"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy">
-                </iframe>
-
+            <div class="untitled-title">
+              UNTITLED PROD
             </div>
 
-
-            <!-- SOUNDCLOUD -->
-
-            <div class="soundcloud-card">
-
-                <iframe
-                    scrolling="no"
-                    frameborder="no"
-                    allow="autoplay"
-                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lsoet/sets/mixe-par-kalifa&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
-                    title="Mixe par Kalifa">
-                </iframe>
-
+            <div class="untitled-sub">
+              OUVRIR LE PROJET ↗
             </div>
 
+          </a>
+
+          <a
+            href="https://untitled.stream/library/project/5nNT2RCAy8tt4vDXOg2ji"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="untitled-card"
+          >
+
+            <div class="untitled-title">
+              UNTITLED MIX
+            </div>
+
+            <div class="untitled-sub">
+              OUVRIR LE PROJET ↗
+            </div>
+
+          </a>
 
         </div>
 
+      </div>
 
-        <button
-            class="arrow right"
-            onclick="scrollRightCustom('creditsScroll')"
-            aria-label="Suivant"
-        >
-            →
-        </button>
+    </section>
 
+    <!-- =======================================================
+         COURT METRAGES
+    ======================================================== -->
 
-    </div>
+    <section>
 
-</section>
+      <div class="section-title">
+        court metrages
+      </div>
 
+      <div class="scroll-wrapper">
 
-<!-- =========================================================
-     INSTAGRAM MAPLUSTP
-========================================================= -->
+        <div class="horizontal-scroll">
 
-<section class="social-section">
+          <a
+            href="https://linktr.ee/lucasfaucheuxppsaudiovisuelle"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="simple-card"
+          >
 
-    <a
-        href="https://www.instagram.com/maplustp/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="social-link"
-    >
-        @maplustp
-    </a>
+            <div class="simple-card-title">
+              COURT METRAGES
+            </div>
 
-</section>
+            <div class="simple-card-sub">
+              LINKTREE ↗
+            </div>
 
+          </a>
 
-<!-- =========================================================
-     UNTITLED
-========================================================= -->
-
-<section class="untitled-section">
-
-    <a
-        href="https://untitled.stream/library/project/gate44hTl4t2uCsDs3h7Q"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="untitled-link"
-    >
-        UNTITLED PROD
-    </a>
-
-
-    <a
-        href="https://untitled.stream/library/project/5nNT2RCAy8tt4vDXOg2ji"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="untitled-link"
-    >
-        UNTITLED MIX
-    </a>
-
-</section>
-
-
-<!-- =========================================================
-     COURT METRAGES
-========================================================= -->
-
-<section class="short-film-section">
-
-    <a
-        href="https://linktr.ee/lucasfaucheuxppsaudiovisuelle"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="short-film-link"
-    >
-        COURT METRAGES
-    </a>
-
-</section>
-
-
-<!-- =========================================================
-     03 — QUALIA
-========================================================= -->
-
-<section
-    class="section qualia-section"
-    id="qualia"
->
-
-
-    <div class="section-header">
-
-        <div class="section-title">
-            QUALIA
         </div>
 
-        <div class="section-number">
-            03 / 07
-        </div>
+      </div>
 
-    </div>
+    </section>
 
+    <!-- =======================================================
+         QUALIA
+    ======================================================== -->
 
-    <div class="qualia-grid">
+    <section>
 
+      <div class="section-title">
+        qualia
+      </div>
 
-        <!-- =================================================
-             INSTAGRAM QUALIA
-        ================================================== -->
+      <div class="scroll-wrapper">
 
-        <a
+        <div class="horizontal-scroll">
+
+          <!-- INSTAGRAM QUALIA -->
+
+          <a
             href="https://www.instagram.com/qualiaqualiaqualia/"
             target="_blank"
             rel="noopener noreferrer"
             class="qualia-card"
-        >
-
+          >
 
             <div class="qualia-top">
 
-                <div class="qualia-type">
-                    Instagram
-                </div>
+              <span>
+                Instagram
+              </span>
 
-                <div class="qualia-top-link">
-                    PROFIL ↗
-                </div>
-
-            </div>
-
-
-            <div class="qualia-middle">
-
-                <img
-                    src="assets/qualia.png"
-                    alt="QUALIA Instagram"
-                    class="qualia-profile-image"
-                >
+              <span>
+                PROFIL ↗
+              </span>
 
             </div>
 
+            <div class="qualia-image-wrap">
+
+              <img
+                src="assets/qualia.png"
+                alt="Qualia Instagram"
+                class="qualia-image"
+              >
+
+            </div>
 
             <div class="qualia-bottom">
 
-                <div class="qualia-name">
-                    @qualiaqualiaqualia
-                </div>
+              <div class="qualia-name">
+                @qualiaqualiaqualia
+              </div>
 
-                <div class="qualia-bottom-link">
-                    VISITER LE PROFIL ↗
-                </div>
+              <div class="qualia-action">
+                VISITER LE PROFIL ↗
+              </div>
 
             </div>
 
+          </a>
 
-        </a>
+          <!-- YOUTUBE QUALIA -->
 
-
-        <!-- =================================================
-             YOUTUBE QUALIA
-             TOUT LE CADRE EST CLIQUABLE
-        ================================================== -->
-
-        <a
+          <a
             href="https://www.youtube.com/@QUALIA-n3m"
             target="_blank"
             rel="noopener noreferrer"
             class="qualia-card"
-        >
-
+          >
 
             <div class="qualia-top">
 
-                <div class="qualia-type">
-                    YouTube
-                </div>
+              <span>
+                YouTube
+              </span>
 
-                <div class="qualia-top-link">
-                    CHAÎNE ↗
-                </div>
-
-            </div>
-
-
-            <div class="qualia-middle">
-
-                <img
-                    src="assets/qualia youtube.png"
-                    alt="QUALIA YouTube"
-                    class="qualia-youtube-profile"
-                >
+              <span>
+                CHAÎNE ↗
+              </span>
 
             </div>
 
+            <div class="qualia-image-wrap">
+
+              <img
+                src="assets/qualia youtube.png"
+                alt="Qualia YouTube"
+                class="qualia-image"
+              >
+
+            </div>
 
             <div class="qualia-bottom">
 
-                <div class="qualia-name">
-                    @QUALIA-n3m
-                </div>
+              <div class="qualia-name">
+                @QUALIA-n3m
+              </div>
 
-                <div class="qualia-bottom-link">
-                    VOIR LA CHAÎNE ↗
-                </div>
+              <div class="qualia-action">
+                VOIR LA CHAÎNE ↗
+              </div>
 
             </div>
 
+          </a>
 
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         FOOTER
+    ======================================================== -->
+
+    <footer>
+
+      <div class="footer-name">
+        JNWLKALIFA
+      </div>
+
+      <div class="footer-email">
+
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          333kalifa@gmail.com
         </a>
 
+      </div>
 
-    </div>
-
-</section>
-
-
-</main>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-    <span>
-        JNWLKALIFA
-    </span>
-
-
-    <a
-        href="https://mail.google.com/mail/?view=cm&fs=1&to=333kalifa@gmail.com"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        333kalifa@gmail.com
-    </a>
-
-
-    <span>
+      <div class="footer-year">
         2026
-    </span>
+      </div>
 
-</footer>
+    </footer>
 
+  </div>
 
-<!-- =========================================================
-     AUDIO DU LOGO
-========================================================= -->
+  <!-- =========================================================
+       TIMER
+  ========================================================= -->
 
-<audio
-    id="logoSound"
-    preload="auto"
->
+  <div id="timer">
+    00:00:00:000
+  </div>
 
-    <source
-        src="assets/c'est pour toi.wav"
-        type="audio/wav"
-    >
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
 
-</audio>
+  <script>
 
+    /* =========================================================
+       LOGO + SON
+    ========================================================= */
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
+    const logo =
+      document.getElementById("mainLogo");
 
-<script>
+    const siteWrapper =
+      document.getElementById("siteWrapper");
 
+    const hoverSound =
+      new Audio("assets/c'est pour toi.wav");
 
-/* =========================================================
-   SON DU LOGO
-========================================================= */
+    hoverSound.volume = 0.85;
 
-const logo =
-    document.getElementById("mainLogo");
+    if (logo) {
 
-const logoSound =
-    document.getElementById("logoSound");
+      logo.addEventListener("mouseenter", () => {
 
+        if (window.innerWidth > 768) {
 
-logo.addEventListener(
-    "mouseenter",
-    () => {
+          siteWrapper.classList.add("blur-active");
 
-        logoSound.currentTime = 0;
-
-        logoSound.play().catch(() => {});
-
-    }
-);
-
-
-/* =========================================================
-   HALO SOURIS
-========================================================= */
-
-const cursorGlow =
-    document.getElementById("cursorGlow");
-
-
-document.addEventListener(
-    "mousemove",
-    (event) => {
-
-        cursorGlow.style.left =
-            event.clientX + "px";
-
-        cursorGlow.style.top =
-            event.clientY + "px";
-
-    }
-);
-
-
-/* =========================================================
-   SCROLL HORIZONTAL
-========================================================= */
-
-function scrollRightCustom(id) {
-
-    const container =
-        document.getElementById(id);
-
-    const amount =
-        Math.min(
-            container.clientWidth * 0.72,
-            720
-        );
-
-
-    if (
-        container.scrollLeft +
-        container.clientWidth
-        >=
-        container.scrollWidth - 10
-    ) {
-
-        container.scrollTo({
-
-            left: 0,
-
-            behavior: "smooth"
-
-        });
-
-    } else {
-
-        container.scrollBy({
-
-            left: amount,
-
-            behavior: "smooth"
-
-        });
-
-    }
-
-}
-
-
-function scrollLeftCustom(id) {
-
-    const container =
-        document.getElementById(id);
-
-    const amount =
-        Math.min(
-            container.clientWidth * 0.72,
-            720
-        );
-
-
-    if (
-        container.scrollLeft <= 10
-    ) {
-
-        container.scrollTo({
-
-            left:
-                container.scrollWidth,
-
-            behavior:
-                "smooth"
-
-        });
-
-    } else {
-
-        container.scrollBy({
-
-            left:
-                -amount,
-
-            behavior:
-                "smooth"
-
-        });
-
-    }
-
-}
-
-
-/* =========================================================
-   APPARITION CINÉMATIQUE
-========================================================= */
-
-const sections =
-    document.querySelectorAll(
-        ".section"
-    );
-
-
-const revealObserver =
-    new IntersectionObserver(
-
-        (entries) => {
-
-            entries.forEach(
-                (entry) => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                    }
-
-                }
-            );
-
-        },
-
-        {
-            threshold: 0.12,
-
-            rootMargin:
-                "0px 0px -8% 0px"
         }
 
-    );
+        hoverSound.currentTime = 0;
 
+        hoverSound.play().catch(() => {});
 
-sections.forEach(
-    (section) => {
+        if (navigator.vibrate) {
 
-        revealObserver.observe(
-            section
-        );
+          navigator.vibrate(35);
+
+        }
+
+      });
+
+      logo.addEventListener("mouseleave", () => {
+
+        siteWrapper.classList.remove("blur-active");
+
+      });
 
     }
-);
 
+    /* =========================================================
+       HALO
+    ========================================================= */
 
-</script>
+    const glow =
+      document.getElementById("cursorGlow");
 
+    document.addEventListener("mousemove", (e) => {
+
+      if (glow) {
+
+        glow.style.left =
+          e.clientX + "px";
+
+        glow.style.top =
+          e.clientY + "px";
+
+      }
+
+    });
+
+    /* =========================================================
+       SECTION REVEAL
+    ========================================================= */
+
+    const sections =
+      document.querySelectorAll("section");
+
+    const sectionObserver =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.08
+        }
+      );
+
+    sections.forEach((section) => {
+
+      sectionObserver.observe(section);
+
+    });
+
+    /* =========================================================
+       SCROLL HORIZONTAL
+    ========================================================= */
+
+    function scrollHorizontal(button, direction) {
+
+      const wrapper =
+        button.closest(".scroll-wrapper");
+
+      if (!wrapper) {
+        return;
+      }
+
+      const scrollArea =
+        wrapper.querySelector(".horizontal-scroll");
+
+      if (!scrollArea) {
+        return;
+      }
+
+      const amount =
+        Math.max(
+          scrollArea.clientWidth * 0.78,
+          380
+        );
+
+      scrollArea.scrollBy({
+
+        left:
+          direction * amount,
+
+        behavior:
+          "smooth"
+
+      });
+
+    }
+
+    /* =========================================================
+       TIMER
+    ========================================================= */
+
+    const timer =
+      document.getElementById("timer");
+
+    const timerStart =
+      performance.now();
+
+    function updateTimer() {
+
+      const elapsed =
+        performance.now() - timerStart;
+
+      const totalMilliseconds =
+        Math.floor(elapsed);
+
+      const milliseconds =
+        totalMilliseconds % 1000;
+
+      const totalSeconds =
+        Math.floor(totalMilliseconds / 1000);
+
+      const seconds =
+        totalSeconds % 60;
+
+      const totalMinutes =
+        Math.floor(totalSeconds / 60);
+
+      const minutes =
+        totalMinutes % 60;
+
+      const hours =
+        Math.floor(totalMinutes / 60);
+
+      const hh =
+        String(hours).padStart(2, "0");
+
+      const mm =
+        String(minutes).padStart(2, "0");
+
+      const ss =
+        String(seconds).padStart(2, "0");
+
+      const ms =
+        String(milliseconds).padStart(3, "0");
+
+      if (timer) {
+
+        timer.textContent =
+          `${hh}:${mm}:${ss}:${ms}`;
+
+      }
+
+      requestAnimationFrame(updateTimer);
+
+    }
+
+    updateTimer();
+
+  </script>
 
 </body>
 
