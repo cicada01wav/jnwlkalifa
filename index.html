@@ -594,6 +594,66 @@
     }
 
     /* =========================================================
+       LIENS ENTRE LES SECTIONS
+    ========================================================= */
+
+    .between-links {
+
+      width: 100%;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 34px;
+
+      padding:
+        15px 20px 70px;
+
+      text-align: center;
+    }
+
+    .between-links a {
+
+      font-family: 'Rajdhani', sans-serif;
+
+      font-size: 0.88rem;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+
+      opacity: 0.62;
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .between-links a:hover {
+
+      opacity: 1;
+
+      transform:
+        translateY(-2px);
+    }
+
+    .untitled-links {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 34px;
+    }
+
+    /* =========================================================
        CREDITS CARD
     ========================================================= */
 
@@ -795,150 +855,6 @@
     }
 
     /* =========================================================
-       SIMPLE LINK CARDS
-    ========================================================= */
-
-    .simple-card {
-
-      min-width: 360px;
-
-      width: 360px;
-
-      height: 170px;
-
-      flex-shrink: 0;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      text-align: center;
-
-      background: #0a0a0a;
-
-      border: 1px solid rgba(255,255,255,0.11);
-
-      border-radius: 20px;
-
-      padding: 30px;
-
-      transition:
-        transform 0.45s ease,
-        filter 0.45s ease,
-        box-shadow 0.45s ease;
-    }
-
-    .simple-card:hover {
-
-      transform:
-        scale(1.025);
-
-      filter:
-        brightness(1.06);
-
-      box-shadow:
-        0 0 35px rgba(255,255,255,0.05);
-    }
-
-    .simple-card-title {
-
-      font-family: 'Rajdhani', sans-serif;
-
-      font-size: 1.1rem;
-
-      letter-spacing: 3px;
-
-      text-transform: uppercase;
-
-      margin-bottom: 12px;
-
-      opacity: 0.92;
-    }
-
-    .simple-card-sub {
-
-      font-size: 0.8rem;
-
-      letter-spacing: 2px;
-
-      text-transform: uppercase;
-
-      opacity: 0.52;
-    }
-
-    /* =========================================================
-       UNTITLED
-    ========================================================= */
-
-    .untitled-card {
-
-      min-width: 380px;
-
-      width: 380px;
-
-      height: 190px;
-
-      flex-shrink: 0;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      text-align: center;
-
-      background: #0a0a0a;
-
-      border: 1px solid rgba(255,255,255,0.11);
-
-      border-radius: 20px;
-
-      transition:
-        transform 0.45s ease,
-        filter 0.45s ease,
-        box-shadow 0.45s ease;
-    }
-
-    .untitled-card:hover {
-
-      transform:
-        scale(1.025);
-
-      filter:
-        brightness(1.06);
-
-      box-shadow:
-        0 0 35px rgba(255,255,255,0.05);
-    }
-
-    .untitled-title {
-
-      font-family: 'Rajdhani', sans-serif;
-
-      font-size: 1.15rem;
-
-      letter-spacing: 3px;
-
-      margin-bottom: 10px;
-    }
-
-    .untitled-sub {
-
-      font-size: 0.78rem;
-
-      letter-spacing: 2px;
-
-      opacity: 0.52;
-    }
-
-    /* =========================================================
        QUALIA CARDS
     ========================================================= */
 
@@ -1084,76 +1000,6 @@
 
     .qualia-card:hover .qualia-action {
       opacity: 0.95;
-    }
-
-    /* =========================================================
-       INSTAGRAM SINGLE
-    ========================================================= */
-
-    .instagram-card {
-
-      min-width: 500px;
-
-      width: 500px;
-
-      height: 170px;
-
-      flex-shrink: 0;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      text-align: center;
-
-      background: #0a0a0a;
-
-      border: 1px solid rgba(255,255,255,0.11);
-
-      border-radius: 20px;
-
-      transition:
-        transform 0.45s ease,
-        filter 0.45s ease,
-        box-shadow 0.45s ease;
-    }
-
-    .instagram-card:hover {
-
-      transform:
-        scale(1.025);
-
-      filter:
-        brightness(1.05);
-
-      box-shadow:
-        0 0 35px rgba(255,255,255,0.05);
-    }
-
-    .instagram-title {
-
-      font-family: 'Rajdhani', sans-serif;
-
-      font-size: 1rem;
-
-      letter-spacing: 3px;
-
-      text-transform: uppercase;
-
-      margin-bottom: 12px;
-    }
-
-    .instagram-name {
-
-      font-size: 0.85rem;
-
-      letter-spacing: 2px;
-
-      opacity: 0.58;
     }
 
     /* =========================================================
@@ -1348,6 +1194,36 @@
         border-radius: 16px;
       }
 
+      /* =====================================================
+         LIENS CENTRES MOBILE
+      ====================================================== */
+
+      .between-links {
+
+        flex-direction: column;
+
+        gap: 22px;
+
+        padding:
+          10px 20px 60px;
+      }
+
+      .untitled-links {
+
+        gap: 20px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+      }
+
+      .between-links a {
+
+        font-size: 0.8rem;
+
+        letter-spacing: 2px;
+      }
+
       .muso-card {
 
         min-width: 88vw;
@@ -1383,39 +1259,6 @@
         width: 88vw;
 
         height: 280px;
-
-        border-radius: 16px;
-      }
-
-      .simple-card {
-
-        min-width: 78vw;
-
-        width: 78vw;
-
-        height: 160px;
-
-        border-radius: 16px;
-      }
-
-      .instagram-card {
-
-        min-width: 88vw;
-
-        width: 88vw;
-
-        height: 150px;
-
-        border-radius: 16px;
-      }
-
-      .untitled-card {
-
-        min-width: 78vw;
-
-        width: 78vw;
-
-        height: 160px;
 
         border-radius: 16px;
       }
@@ -1659,6 +1502,46 @@
     </section>
 
     <!-- =======================================================
+         LIENS CENTRES ENTRE CLIP ET CRÉDITS
+    ======================================================== -->
+
+    <div class="between-links">
+
+      <!-- INSTAGRAM -->
+
+      <a
+        href="https://www.instagram.com/maplustp/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        @maplustp ↗
+      </a>
+
+      <!-- UNTITLED -->
+
+      <div class="untitled-links">
+
+        <a
+          href="https://untitled.stream/library/project/gate44hTl4t2uCsDs3h7Q"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          UNTITLED PROD ↗
+        </a>
+
+        <a
+          href="https://untitled.stream/library/project/5nNT2RCAy8tt4vDXOg2ji"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          UNTITLED MIX ↗
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================
          CREDITS
     ======================================================== -->
 
@@ -1734,134 +1617,6 @@
         >
           ›
         </button>
-
-      </div>
-
-    </section>
-
-    <!-- =======================================================
-         INSTAGRAM
-    ======================================================== -->
-
-    <section>
-
-      <div class="section-title">
-        instagram
-      </div>
-
-      <div class="scroll-wrapper">
-
-        <div class="horizontal-scroll">
-
-          <a
-            href="https://www.instagram.com/maplustp/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="instagram-card"
-          >
-
-            <div class="instagram-title">
-              @maplustp
-            </div>
-
-            <div class="instagram-name">
-              INSTAGRAM ↗
-            </div>
-
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- =======================================================
-         UNTITLED
-    ======================================================== -->
-
-    <section>
-
-      <div class="section-title">
-        untitled
-      </div>
-
-      <div class="scroll-wrapper">
-
-        <div class="horizontal-scroll">
-
-          <a
-            href="https://untitled.stream/library/project/gate44hTl4t2uCsDs3h7Q"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="untitled-card"
-          >
-
-            <div class="untitled-title">
-              UNTITLED PROD
-            </div>
-
-            <div class="untitled-sub">
-              OUVRIR LE PROJET ↗
-            </div>
-
-          </a>
-
-          <a
-            href="https://untitled.stream/library/project/5nNT2RCAy8tt4vDXOg2ji"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="untitled-card"
-          >
-
-            <div class="untitled-title">
-              UNTITLED MIX
-            </div>
-
-            <div class="untitled-sub">
-              OUVRIR LE PROJET ↗
-            </div>
-
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- =======================================================
-         COURT METRAGES
-    ======================================================== -->
-
-    <section>
-
-      <div class="section-title">
-        court metrages
-      </div>
-
-      <div class="scroll-wrapper">
-
-        <div class="horizontal-scroll">
-
-          <a
-            href="https://linktr.ee/lucasfaucheuxppsaudiovisuelle"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="simple-card"
-          >
-
-            <div class="simple-card-title">
-              COURT METRAGES
-            </div>
-
-            <div class="simple-card-sub">
-              LINKTREE ↗
-            </div>
-
-          </a>
-
-        </div>
 
       </div>
 
