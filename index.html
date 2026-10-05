@@ -1932,7 +1932,7 @@
     });
 
     /* =========================================================
-       SCROLL HORIZONTAL
+       SCROLL HORIZONTAL AVEC BOUCLE
     ========================================================= */
 
     function scrollHorizontal(button, direction) {
@@ -1956,6 +1956,37 @@
           scrollArea.clientWidth * 0.78,
           380
         );
+
+      const maxScroll =
+        scrollArea.scrollWidth -
+        scrollArea.clientWidth;
+
+      const tolerance = 10;
+
+      /* -------------------------------------------------------
+         FLÈCHE DROITE :
+         si on est déjà au bout, retour au début
+      ------------------------------------------------------- */
+
+      if (
+        direction === 1 &&
+        scrollArea.scrollLeft >= maxScroll - tolerance
+      ) {
+
+        scrollArea.scrollTo({
+
+          left: 0,
+
+          behavior: "smooth"
+
+        });
+
+        return;
+      }
+
+      /* -------------------------------------------------------
+         FLÈCHE NORMALE
+      ------------------------------------------------------- */
 
       scrollArea.scrollBy({
 
